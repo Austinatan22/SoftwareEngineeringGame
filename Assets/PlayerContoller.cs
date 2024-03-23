@@ -9,7 +9,7 @@ public class PlayerContoller : MonoBehaviour
     public float speed;
     Rigidbody2D rigidbody;
     public Text collectedText;
-    public static  int collectedAmount = 0;
+    public static int collectedAmount = 0;
     public GameObject bulletPrefab;
     public float bulletSpeed;
     private float lastFire;
@@ -25,13 +25,17 @@ public class PlayerContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fireDelay = GameController.fireRate;
+        speed = GameController.MoveSpeed;
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         float shootHorizontal = Input.GetAxis("ShootHorizontal");
         float shootVertical = Input.GetAxis("ShootVertical");
 
-        if((shootHorizontal != 0 || shootVertical != 0) && Time.time > lastFire + fireDelay){
+        if ((shootHorizontal != 0 || shootVertical != 0) && Time.time > lastFire + fireDelay)
+        {
             Shoot(shootHorizontal, shootVertical);
             lastFire = Time.time;
         }
@@ -40,7 +44,8 @@ public class PlayerContoller : MonoBehaviour
         collectedText.text = "Item Collected: " + collectedAmount;
     }
 
-    void Shoot(float x, float y){
+    void Shoot(float x, float y)
+    {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation) as GameObject;
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(
