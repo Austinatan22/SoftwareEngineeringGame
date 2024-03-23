@@ -206,9 +206,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.itemImage
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: 8b68db48ec2b43248a1ed08866a8b224, type: 3}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: bulletSizeChange
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2117186555583127217, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_Name
-      value: Object (3)
+      value: Mag
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9345745
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6906089084934415089, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_LocalPosition.x
@@ -605,7 +625,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Collect Amount: 0
+  m_Text: 'Collect: 0
 
 '
 --- !u!222 &777306152
@@ -624,9 +644,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.itemImage
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: 8b68db48ec2b43248a1ed08866a8b224, type: 3}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: attackSpeedChange
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2117186555583127217, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_Name
-      value: Object (2)
+      value: Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 6906089084934415089, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_LocalPosition.x
@@ -909,9 +937,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.itemImage
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: 8b68db48ec2b43248a1ed08866a8b224, type: 3}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: moveSpeedChange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2117186555583127217, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_Name
-      value: Object (1)
+      value: Boots
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.g
+      value: 0.99086285
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6906089084934415089, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1034,9 +1082,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.name
+      value: Potion
+      objectReference: {fileID: 0}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: healthChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.itemImage
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: 8b68db48ec2b43248a1ed08866a8b224, type: 3}
+    - target: {fileID: -2631370365096951827, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: item.description
+      value: Gives the player +1 HP
+      objectReference: {fileID: 0}
     - target: {fileID: 2117186555583127217, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_Name
-      value: Object
+      value: Potion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145994787210829820, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6906089084934415089, guid: df9d157ed6af69b4d8b26955f1095056, type: 3}
       propertyPath: m_LocalPosition.x
