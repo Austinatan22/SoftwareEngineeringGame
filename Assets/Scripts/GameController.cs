@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     private static float moveSpeed = 5f;
     public static float fireRate = 0.5f;
     private static float bulletSize = 0.5f;
+    static GameObject playerObj;
+
 
     public static int Health { get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -22,6 +24,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        playerObj = GameObject.Find("Player");
+
         if (instance == null)
         {
             instance = this;
@@ -45,7 +49,7 @@ public class GameController : MonoBehaviour
 
     private static void KillPlayer()
     {
-
+        Destroy(playerObj);
     }
     public static void HealPlayer(int healAmount)
     {

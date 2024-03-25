@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
     private bool dead = false;
     private bool coolDownAtk = false;
     private Vector3 randomDir;
+    public GameObject bulletPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,17 +105,35 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
+        // if (!coolDownAtk)
+        // {
+        //     switch (enemyType)
+        //     {
+        //         case (enemyType.Melee):
+        //             GameController.DamagePlayer(1);
+        //             StartCoroutine(CoolDown());
+        //         break;
+        //     }
+        //     GameController.DamagePlayer(1);
+        //     StartCoroutine(CoolDown());
+        // }
         if (!coolDownAtk)
         {
             switch (enemyType)
             {
-                case (enemyType.Melee):
+                case (EnemyType.Melee):
                     GameController.DamagePlayer(1);
                     StartCoroutine(CoolDown());
-                break;
+                    break;
+
+                case (EnemyType.Ranged):
+                    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
+                    bullet.GetComponent<BulletController>().GetPlayer(player.transform);
+                    bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+                    bullet.GetComponent<BulletController>().isEnemyBullet = true;
+                    StartCoroutine(CoolDown());
+                    break;
             }
-            GameController.DamagePlayer(1);
-            StartCoroutine(CoolDown());
         }
     }
 

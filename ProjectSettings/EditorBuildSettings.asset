@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/DungeonGen/BasementEmpty.unity
+    guid: 17429f87ba3f04c488b9fe94a13ebbaf
+  - enabled: 1
+    path: Assets/Scenes/DungeonGen/BasementEnd.unity
+    guid: 4eebe8738a967c14cb109d59ce1089ac
+  - enabled: 1
+    path: Assets/Scenes/DungeonGen/basementStart.unity
+    guid: 8144b92194efe60479edda1f10bd44b4
   m_configObjects: {}

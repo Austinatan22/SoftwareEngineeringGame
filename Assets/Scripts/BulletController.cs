@@ -11,6 +11,7 @@ public class BulletController : MonoBehaviour
     private Vector2 lastPos;
     private Vector2 curPos;
 
+
     void Start()
     {
         StartCoroutine(DeathDelay());

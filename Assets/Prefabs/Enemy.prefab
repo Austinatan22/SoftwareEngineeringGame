@@ -99,10 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currState: 0
+  enemyType: 0
   range: 0
   speed: 0
   attackRange: 0
   coolDown: 0
+  bulletPrefab: {fileID: 8674325313094564715, guid: 25b83683e267a8749b3df29aa9dea441, type: 3}
 --- !u!61 &-1700345814131325205
 BoxCollider2D:
   m_ObjectHideFlags: 0
