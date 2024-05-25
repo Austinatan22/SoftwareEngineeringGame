@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - room
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Door
+  - 
   - Water
   - UI
   - 
@@ -39,9 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Behind
+    uniqueID: 2368450815
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Door
-    uniqueID: 3087098279
+    uniqueID: 2803949497
+    locked: 0
+  - name: Wall
+    uniqueID: 3688842989
     locked: 0
