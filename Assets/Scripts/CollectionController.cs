@@ -10,23 +10,31 @@ public class Item
 
 public class CollectionController : MonoBehaviour
 {
-
     public Item item;
     public float healthChange;
     public float moveSpeedChange;
     public float attackSpeedChange;
     public float bulletSizeChange;
+
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = item.itemImage;
-        Destroy(GetComponent<PolygonCollider2D>());
-        gameObject.AddComponent<PolygonCollider2D>();
+
+        // Destroy the existing PolygonCollider2D if it exists and add a new one
+        PolygonCollider2D polygonCollider = GetComponent<PolygonCollider2D>();
+        if (polygonCollider != null)
+        {
+            Destroy(polygonCollider);
+        }
+
+        polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
+        polygonCollider.isTrigger = true; // Set the collider to be a trigger
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             PlayerController.collectedAmount++;
             GameController.HealPlayer(healthChange);

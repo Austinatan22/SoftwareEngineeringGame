@@ -11,22 +11,22 @@ public class BulletController : MonoBehaviour
     private Vector2 curPos;
     private Vector2 playerPos;
     // Start is called before the first frame update
-    void Start() 
+    void Start()
     {
         StartCoroutine(DeathDelay());
-        if(!isEnemyBullet)
-        { 
+        if (!isEnemyBullet)
+        {
             transform.localScale = new Vector2(GameController.BulletSize, GameController.BulletSize);
         }
     }
 
     void Update()
     {
-        if(isEnemyBullet)
+        if (isEnemyBullet)
         {
             curPos = transform.position;
             transform.position = Vector2.MoveTowards(transform.position, playerPos, 5f * Time.deltaTime);
-            if(curPos == lastPos)
+            if (curPos == lastPos)
             {
                 Destroy(gameObject);
             }
@@ -47,16 +47,22 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Enemy" && !isEnemyBullet)
+        if (col.tag == "Enemy" && !isEnemyBullet)
         {
-            col.gameObject.GetComponent<EnemyController>().Death();
+            EnemyController enemyController = col.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.DamageEnemy(1);
+            }
             Destroy(gameObject);
         }
 
-        if(col.tag == "Player" && isEnemyBullet)
+        if (col.tag == "Player" && isEnemyBullet)
         {
             GameController.DamagePlayer(1);
             Destroy(gameObject);
         }
     }
+
+
 }

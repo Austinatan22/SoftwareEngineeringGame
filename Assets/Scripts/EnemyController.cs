@@ -19,7 +19,6 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
-
     GameObject player;
     public EnemyState currState = EnemyState.Idle;
     public EnemyType enemyType;
@@ -28,51 +27,51 @@ public class EnemyController : MonoBehaviour
     public float attackRange;
     public float bulletSpeed;
     public float coolDown;
+    public float health = 3;
+    public float Health { get => health; set => health = value; }
     private bool chooseDir = false;
     private bool dead = false;
     private bool coolDownAttack = false;
     public bool notInRoom = false;
     private Vector3 randomDir;
     public GameObject bulletPrefab;
+    private float originalSpeed; // Store the original speed
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        originalSpeed = speed; // Initialize the original speed
     }
 
-    // Update is called once per frame
     void Update()
     {
-        switch(currState)
+        switch (currState)
         {
-            //case(EnemyState.Idle):
-            //    Idle();
-            //break;
-            case(EnemyState.Wander):
+            case (EnemyState.Wander):
                 Wander();
-            break;
-            case(EnemyState.Follow):
+                break;
+            case (EnemyState.Follow):
                 Follow();
-            break;
-            case(EnemyState.Die):
-            break;
-            case(EnemyState.Attack):
+                break;
+            case (EnemyState.Die):
+                break;
+            case (EnemyState.Attack):
                 Attack();
-            break;
+                break;
         }
 
-        if(!notInRoom)
+        if (!notInRoom)
         {
-            if(IsPlayerInRange(range) && currState != EnemyState.Die)
+            if (IsPlayerInRange(range) && currState != EnemyState.Die)
             {
                 currState = EnemyState.Follow;
+                speed = originalSpeed; // Restore speed when following the player
             }
-            else if(!IsPlayerInRange(range) && currState != EnemyState.Die)
+            else if (!IsPlayerInRange(range) && currState != EnemyState.Die)
             {
                 currState = EnemyState.Wander;
             }
-            if(Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {
                 currState = EnemyState.Attack;
             }
@@ -100,15 +99,16 @@ public class EnemyController : MonoBehaviour
 
     void Wander()
     {
-        if(!chooseDir)
+        if (!chooseDir)
         {
             StartCoroutine(ChooseDirection());
         }
 
         transform.position += -transform.right * speed * Time.deltaTime;
-        if(IsPlayerInRange(range))
+        if (IsPlayerInRange(range))
         {
             currState = EnemyState.Follow;
+            speed = originalSpeed; // Restore speed when following the player
         }
     }
 
@@ -119,21 +119,21 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
-        if(!coolDownAttack)
+        if (!coolDownAttack)
         {
-            switch(enemyType)
+            switch (enemyType)
             {
-                case(EnemyType.Melee):
+                case (EnemyType.Melee):
                     GameController.DamagePlayer(1);
                     StartCoroutine(CoolDown());
-                break;
-                case(EnemyType.Ranged):
+                    break;
+                case (EnemyType.Ranged):
                     GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
                     bullet.GetComponent<BulletController>().GetPlayer(player.transform);
                     bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
                     bullet.GetComponent<BulletController>().isEnemyBullet = true;
                     StartCoroutine(CoolDown());
-                break;
+                    break;
             }
         }
     }
@@ -144,10 +144,31 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(coolDown);
         coolDownAttack = false;
     }
-
-    public void Death()
+    public void DamageEnemy(int damage)
     {
-        RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
-        Destroy(gameObject);
+        health -= damage;
+
+        if (Health <= 0)
+        {
+            RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
+            Destroy(gameObject);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // Stop the enemy's movement
+            speed = 0;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            // Stop the enemy's movement
+            speed = 0;
+        }
     }
 }
