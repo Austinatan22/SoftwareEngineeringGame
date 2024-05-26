@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public Text collectedText;
     public static int collectedAmount = 0;
 
-    
+
     public GameObject bulletPrefab;
     public float bulletSpeed;
     private float lastFire;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
         float shootHor = Input.GetAxis("ShootHorizontal");
         float shootVert = Input.GetAxis("ShootVertical");
-        if((shootHor != 0 || shootVert != 0) && Time.time > lastFire + fireDelay)
+        if ((shootHor != 0 || shootVert != 0) && Time.time > lastFire + fireDelay)
         {
             Shoot(shootHor, shootVert);
             lastFire = Time.time;
