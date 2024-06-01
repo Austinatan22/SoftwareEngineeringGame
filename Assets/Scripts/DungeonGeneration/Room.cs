@@ -30,7 +30,6 @@ public class Room : MonoBehaviour
     {
         if(RoomController.instance == null)
         {
-            Debug.Log("You pressed play in the wrong scene!");
             return;
         }
 
@@ -69,7 +68,6 @@ public class Room : MonoBehaviour
 
     public void RemoveUnconnectedDoors()
     {
-        Debug.Log("removing doors");
         foreach(Door door in doors)
         {
             switch(door.doorType)

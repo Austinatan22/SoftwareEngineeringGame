@@ -20,6 +20,7 @@ public class NextLevel : MonoBehaviour
             // Player entered, so move level
             print("Switching Scene to " + sceneBuildIndex);
             SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+            GameController.instance.IncrementLevelCount();
         }
     }
 

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     private static float moveSpeed = 5f;
     private static float fireRate = 0.5f;
     private static float bulletSize = 0.5f;
+    private static int levelCount = 1;
 
     private bool bootCollected = false;
     private bool screwCollected = false;
@@ -24,13 +25,13 @@ public class GameController : MonoBehaviour
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public static float FireRate { get => fireRate; set => fireRate = value; }
     public static float BulletSize { get => bulletSize; set => bulletSize = value; }
-    
+
     public Text healthText;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -46,7 +47,7 @@ public class GameController : MonoBehaviour
     {
         health -= damage;
 
-        if(Health <= 0)
+        if (Health <= 0)
         {
             KillPlayer();
         }
@@ -71,24 +72,29 @@ public class GameController : MonoBehaviour
         bulletSize += size;
     }
 
+    public void IncrementLevelCount()
+    {
+        levelCount++;
+        Debug.Log("Level Count: " + levelCount);
+    }
     public void UpdateCollectedItems(CollectionController item)
     {
         collectedNames.Add(item.item.name);
 
-        foreach(string i in collectedNames)
+        foreach (string i in collectedNames)
         {
-            switch(i)
+            switch (i)
             {
                 case "Boot":
                     bootCollected = true;
-                break;
+                    break;
                 case "Screw":
                     screwCollected = true;
-                break;
+                    break;
             }
         }
 
-        if(bootCollected && screwCollected)
+        if (bootCollected && screwCollected)
         {
             FireRateChange(0.25f);
         }
