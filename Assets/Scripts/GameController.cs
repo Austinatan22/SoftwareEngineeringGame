@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 
     private bool bootCollected = false;
     private bool screwCollected = false;
+    public static bool firstTime = true;
 
     public List<string> collectedNames = new List<string>();
     public GameOverManager gameOverManager;
