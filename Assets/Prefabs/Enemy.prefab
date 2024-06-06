@@ -148,7 +148,7 @@ MonoBehaviour:
   enemyType: 0
   range: 10
   speed: 1
-  attackRange: 1
+  attackRange: 1.2
   bulletSpeed: 0
   coolDown: 2
   health: 3

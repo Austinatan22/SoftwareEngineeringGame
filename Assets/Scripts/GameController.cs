@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-
     public static GameController instance;
 
-    private static float health = 6;
+    private static float health = 1;
     private static int maxHealth = 6;
     private static float moveSpeed = 5f;
     private static float fireRate = 0.5f;
@@ -19,6 +18,7 @@ public class GameController : MonoBehaviour
     private bool screwCollected = false;
 
     public List<string> collectedNames = new List<string>();
+    public GameOverManager gameOverManager;
 
     public static float Health { get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -102,6 +102,13 @@ public class GameController : MonoBehaviour
 
     private static void KillPlayer()
     {
-
+        if (instance != null && instance.gameOverManager != null)
+        {
+            instance.gameOverManager.OnPlayerDeath();
+        }
+        else
+        {
+            Debug.LogWarning("GameOverManager is not set or not found!");
+        }
     }
 }
