@@ -105,6 +105,7 @@ public class GameController : MonoBehaviour
     {
         if (instance != null && instance.gameOverManager != null)
         {
+            RoomController.instance.ResetShopSpawned();
             instance.gameOverManager.OnPlayerDeath();
         }
         else

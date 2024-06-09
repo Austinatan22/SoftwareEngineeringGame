@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidbody;
     public Text collectedText;
     public static int collectedAmount = 0;
-
+    public KeyCode pickupKey = KeyCode.F;
 
     public GameObject bulletPrefab;
     public float bulletSpeed;

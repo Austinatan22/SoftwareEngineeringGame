@@ -16,6 +16,10 @@ public class RoomController : MonoBehaviour
 
     public static RoomController instance;
 
+    private List<string> possibleRooms = new List<string>() {"Empty", "Basic1", "Shop"};
+
+    private bool shopRoomSpawned = false;
+
     string currentWorldName = "Basement";
 
     RoomInfo currentLoadRoomData;
@@ -166,12 +170,21 @@ public class RoomController : MonoBehaviour
 
     public string GetRandomRoomName()
     {
-        string[] possibleRooms = new string[] {
-            "Empty",
-            "Basic1"
-        };
+        string temp = possibleRooms[Random.Range(0, possibleRooms.Count)];
 
-        return possibleRooms[Random.Range(0, possibleRooms.Length)];
+        if(temp == "Shop" && shopRoomSpawned == false)
+        {
+            shopRoomSpawned = true;
+            possibleRooms.Remove("Shop");
+        }
+        return temp;
+    }
+
+    public void ResetShopSpawned()
+    {
+        shopRoomSpawned = false;
+        if (!possibleRooms.Contains("Shop"))
+            possibleRooms.Add("Shop");
     }
 
     public void OnPlayerEnterRoom(Room room)
