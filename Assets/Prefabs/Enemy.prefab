@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5051726810918457016}
   - component: {fileID: 5051726810918457015}
   - component: {fileID: 5051726810918457014}
-  - component: {fileID: -5993189087505549464}
+  - component: {fileID: 272250029064193462}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -154,7 +154,9 @@ MonoBehaviour:
   health: 3
   notInRoom: 0
   bulletPrefab: {fileID: 0}
---- !u!50 &-5993189087505549464
+  coinPrefab: {fileID: 3755727769233015320, guid: 82ae46ca646303744a4623e2dd0d50a4,
+    type: 3}
+--- !u!50 &272250029064193462
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

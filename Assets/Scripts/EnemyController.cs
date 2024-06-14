@@ -36,6 +36,9 @@ public class EnemyController : MonoBehaviour
     private Vector3 randomDir;
     public GameObject bulletPrefab;
     private float originalSpeed; // Store the original speed
+    public GameObject coinPrefab; // Assign the coin prefab in the inspector
+    private System.Random randnum = new System.Random();
+
 
     void Start()
     {
@@ -150,6 +153,13 @@ public class EnemyController : MonoBehaviour
 
         if (Health <= 0)
         {
+            double randomNumber = randnum.NextDouble();
+
+            // 30% chance to drop a coin
+            if (randomNumber <= 0.3)
+            {
+                Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            }
             RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
             Destroy(gameObject);
         }
@@ -171,4 +181,5 @@ public class EnemyController : MonoBehaviour
             speed = 0;
         }
     }
+
 }

@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - room
   - Wall
+  - GruzMother
+  - Dropped
+  - Coin
   layers:
   - Default
   - TransparentFX
