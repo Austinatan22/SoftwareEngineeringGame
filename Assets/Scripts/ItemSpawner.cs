@@ -1,48 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Spawnable
-    {
-        public GameObject gameObject;
-        public float weight;
-    }
+    public GameObject[] itemPrefabs; // Array to hold item prefabs
+    public Transform[] spawnPoints; // Array to hold possible spawn points
 
-    public List<Spawnable> items = new List<Spawnable>();
-    float totalWeight;
-
-    void Awake()
-    {
-        totalWeight = 0;
-        foreach(var spawnable in items)
-        {
-            totalWeight += spawnable.weight;
-        }
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        float pick = Random.value * totalWeight;
-        int chosenIndex = 0;
-        float cumulativeWeight = items[0].weight;
-
-        while(pick > cumulativeWeight && chosenIndex < items.Count - 1)
-        {
-            chosenIndex++;
-            cumulativeWeight += items[chosenIndex].weight;
-        }
-
-        GameObject i = Instantiate(items[chosenIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
-
+        SpawnItems();
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnItems()
     {
-        
+        // Check if the number of spawn points is less than the number of items to spawn
+        if (spawnPoints.Length < 3)
+        {
+            Debug.LogError("Not enough spawn points to spawn items");
+            return;
+        }
+
+        // Shuffle the array of spawn points to get random positions
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            Transform temp = spawnPoints[i];
+            int randomIndex = Random.Range(i, spawnPoints.Length);
+            spawnPoints[i] = spawnPoints[randomIndex];
+            spawnPoints[randomIndex] = temp;
+        }
+
+        // Spawn 3 random items at the first 3 shuffled spawn points
+        for (int i = 0; i < 3; i++)
+        {
+            int itemIndex = Random.Range(0, itemPrefabs.Length);
+            Instantiate(itemPrefabs[itemIndex], spawnPoints[i].position, Quaternion.identity);
+        }
     }
 }

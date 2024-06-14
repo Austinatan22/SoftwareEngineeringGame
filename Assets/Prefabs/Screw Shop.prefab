@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6044479761511570030}
   - component: {fileID: 6044479761511570028}
   m_Layer: 0
-  m_Name: Screw
-  m_TagString: Dropped
+  m_Name: Screw Shop
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,4 +105,4 @@ MonoBehaviour:
   moveSpeedChange: 0
   attackSpeedChange: 0.25
   bulletSizeChange: 0.25
-  cost: 0
+  cost: 7

@@ -15,7 +15,7 @@ public class CollectionController : MonoBehaviour
     public float moveSpeedChange;
     public float attackSpeedChange;
     public float bulletSizeChange;
-    public float cost;
+    public int cost;
 
     private bool playerInRange = false;
 
@@ -73,6 +73,7 @@ public class CollectionController : MonoBehaviour
             GameController.FireRateChange(attackSpeedChange);
             GameController.BulletSizeChange(bulletSizeChange);
             GameController.instance.UpdateCollectedItems(this);
+            CurrencyManager.instance.SpendCurrency(cost);
             Destroy(gameObject);  // Destroy item after pickup
         }
         else if (playerInRange && gameObject.tag == "Coin")

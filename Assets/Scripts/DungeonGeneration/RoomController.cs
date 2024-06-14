@@ -16,9 +16,13 @@ public class RoomController : MonoBehaviour
 
     public static RoomController instance;
 
-    string currentWorldName = "Basement";
+    private List<string> possibleRooms = new List<string>() { "Empty", "Basic1", "Shop" };
 
     RoomInfo currentLoadRoomData;
+    private bool shopRoomSpawned = false;
+
+    string currentWorldName = "Basement";
+
 
     Room currRoom;
 
@@ -51,20 +55,20 @@ public class RoomController : MonoBehaviour
 
     void UpdateRoomQueue()
     {
-        if(isLoadingRoom)
+        if (isLoadingRoom)
         {
             return;
         }
 
-        if(loadRoomQueue.Count == 0)
+        if (loadRoomQueue.Count == 0)
         {
-            if(!spawnedBossRoom)
+            if (!spawnedBossRoom)
             {
                 StartCoroutine(SpawnBossRoom());
-            } 
-            else if(spawnedBossRoom && !updatedRooms)
+            }
+            else if (spawnedBossRoom && !updatedRooms)
             {
-                foreach(Room room in loadedRooms)
+                foreach (Room room in loadedRooms)
                 {
                     room.RemoveUnconnectedDoors();
                 }
@@ -84,7 +88,7 @@ public class RoomController : MonoBehaviour
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
-        if(loadRoomQueue.Count == 0)
+        if (loadRoomQueue.Count == 0)
         {
             Room bossRoom = loadedRooms[loadedRooms.Count - 1];
             Room tempRoom = new Room(bossRoom.X, bossRoom.Y);
@@ -95,9 +99,9 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    public void LoadRoom( string name, int x, int y)
+    public void LoadRoom(string name, int x, int y)
     {
-        if(DoesRoomExist(x, y) == true)
+        if (DoesRoomExist(x, y) == true)
         {
             return;
         }
@@ -116,15 +120,15 @@ public class RoomController : MonoBehaviour
 
         AsyncOperation loadRoom = SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
 
-        while(loadRoom.isDone == false)
+        while (loadRoom.isDone == false)
         {
             yield return null;
         }
     }
 
-    public void RegisterRoom( Room room)
+    public void RegisterRoom(Room room)
     {
-        if(!DoesRoomExist(currentLoadRoomData.X, currentLoadRoomData.Y))
+        if (!DoesRoomExist(currentLoadRoomData.X, currentLoadRoomData.Y))
         {
             room.transform.position = new Vector3(
                 currentLoadRoomData.X * room.Width,
@@ -139,7 +143,7 @@ public class RoomController : MonoBehaviour
 
             isLoadingRoom = false;
 
-            if(loadedRooms.Count == 0)
+            if (loadedRooms.Count == 0)
             {
                 CameraController.instance.currRoom = room;
             }
@@ -153,27 +157,33 @@ public class RoomController : MonoBehaviour
         }
 
     }
-
-    public bool DoesRoomExist( int x, int y)
+    public void ResetShopSpawned()
     {
-        return loadedRooms.Find( item => item.X == x && item.Y == y) != null;
+        shopRoomSpawned = false;
+        if (!possibleRooms.Contains("Shop"))
+            possibleRooms.Add("Shop");
+    }
+    public bool DoesRoomExist(int x, int y)
+    {
+        return loadedRooms.Find(item => item.X == x && item.Y == y) != null;
     }
 
-    public Room FindRoom( int x, int y)
+    public Room FindRoom(int x, int y)
     {
-        return loadedRooms.Find( item => item.X == x && item.Y == y);
+        return loadedRooms.Find(item => item.X == x && item.Y == y);
     }
 
     public string GetRandomRoomName()
     {
-        string[] possibleRooms = new string[] {
-            "Empty",
-            "Basic1"
-        };
+        string temp = possibleRooms[Random.Range(0, possibleRooms.Count)];
 
-        return possibleRooms[Random.Range(0, possibleRooms.Length)];
+        if (temp == "Shop" && shopRoomSpawned == false)
+        {
+            shopRoomSpawned = true;
+            possibleRooms.Remove("Shop");
+        }
+        return temp;
     }
-
     public void OnPlayerEnterRoom(Room room)
     {
         CameraController.instance.currRoom = room;
@@ -190,26 +200,26 @@ public class RoomController : MonoBehaviour
 
     public void UpdateRooms()
     {
-        foreach(Room room in loadedRooms)
+        foreach (Room room in loadedRooms)
         {
-            if(currRoom != room)
+            if (currRoom != room)
             {
                 EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-                if(enemies != null)
+                if (enemies != null)
                 {
-                    foreach(EnemyController enemy in enemies)
+                    foreach (EnemyController enemy in enemies)
                     {
                         enemy.notInRoom = true;
                     }
 
-                    foreach(Door door in room.GetComponentsInChildren<Door>())
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         door.doorCollider.SetActive(false);
                     }
                 }
                 else
                 {
-                    foreach(Door door in room.GetComponentsInChildren<Door>())
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         door.doorCollider.SetActive(false);
                     }
@@ -217,26 +227,26 @@ public class RoomController : MonoBehaviour
             }
             else
             {
-              EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-                if(enemies.Length > 0)
+                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+                if (enemies.Length > 0)
                 {
-                    foreach(EnemyController enemy in enemies)
+                    foreach (EnemyController enemy in enemies)
                     {
                         enemy.notInRoom = false;
                     }
-                    
-                    foreach(Door door in room.GetComponentsInChildren<Door>())
+
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         door.doorCollider.SetActive(true);
                     }
                 }
                 else
                 {
-                    foreach(Door door in room.GetComponentsInChildren<Door>())
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         door.doorCollider.SetActive(false);
                     }
-                }  
+                }
             }
         }
     }
