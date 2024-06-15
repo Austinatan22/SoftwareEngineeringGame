@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void ShootTowardsMouse()
+<<<<<<< Updated upstream
     {
         // Get the mouse position in screen coordinates
         Vector3 mouseScreenPosition = Input.mousePosition;
@@ -63,3 +64,29 @@ public class PlayerController : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
     }
 }
+=======
+{
+    // Get the mouse position in screen coordinates
+    Vector3 mouseScreenPosition = Input.mousePosition;
+
+    // Adjust mouse position z to match the distance to the camera
+    // This should be the absolute value if the camera is looking at the origin from a negative z
+    mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
+
+    // Convert the mouse position to world coordinates
+    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+
+    // Ensure the bullet doesn't move along the z-axis
+    mouseWorldPosition.z = 0;
+
+    // Calculate the shooting direction
+    Vector3 shootingDirection = (mouseWorldPosition - transform.position).normalized;
+
+    // Instantiate the bullet at the player's position and orient it towards the shooting direction
+    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(Vector3.forward, shootingDirection)) as GameObject;
+    bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+    bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
+}
+
+}
+>>>>>>> Stashed changes
