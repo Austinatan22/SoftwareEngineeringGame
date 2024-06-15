@@ -10,6 +10,7 @@ public class BulletController : MonoBehaviour
     private Vector2 lastPos;
     private Vector2 curPos;
     private Vector2 playerPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,9 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
+        // Restrict z-axis rotation
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
         if (isEnemyBullet)
         {
             curPos = transform.position;
@@ -63,6 +67,4 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
 }

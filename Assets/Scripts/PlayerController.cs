@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     private float lastFire;
     public float fireDelay;
 
+    public Animator animator;
+
+    private bool isFacingRight = true; // To keep track of the player's facing direction
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +31,32 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        Vector2 moveInput = new Vector2(horizontal, vertical);
+
+        // Normalize the movement vector if it's longer than 1
+        if (moveInput.magnitude > 1)
+        {
+            moveInput.Normalize();
+        }
+
+        // Set animator parameters
+        animator.SetFloat("Horizontal", horizontal);
+        animator.SetFloat("Vertical", vertical);
+        animator.SetFloat("Speed", rigidbody.velocity.magnitude);
+
         // Update movement
-        rigidbody.velocity = new Vector3(horizontal * speed, vertical * speed, 0);
+        rigidbody.velocity = moveInput * speed;
         collectedText.text = "Items Collected: " + collectedAmount;
+
+        // Flip the player sprite based on movement direction
+        if (horizontal > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontal < 0 && isFacingRight)
+        {
+            Flip();
+        }
 
         // Check if left mouse button was clicked and if the firing delay has passed
         if (Input.GetMouseButton(0) && Time.time > lastFire + fireDelay)
@@ -40,53 +67,23 @@ public class PlayerController : MonoBehaviour
     }
 
     void ShootTowardsMouse()
-<<<<<<< Updated upstream
     {
-        // Get the mouse position in screen coordinates
         Vector3 mouseScreenPosition = Input.mousePosition;
-
-        // Adjust mouse position z to match the distance to the camera
-        // This should be the absolute value if the camera is looking at the origin from a negative z
         mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
-
-        // Convert the mouse position to world coordinates
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-
-        // Ensure the bullet doesn't move along the z-axis
         mouseWorldPosition.z = 0;
-
-        // Calculate the shooting direction
         Vector3 shootingDirection = (mouseWorldPosition - transform.position).normalized;
 
-        // Instantiate the bullet at the player's position and orient it towards the shooting direction
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(Vector3.forward, shootingDirection)) as GameObject;
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
     }
+
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }
-=======
-{
-    // Get the mouse position in screen coordinates
-    Vector3 mouseScreenPosition = Input.mousePosition;
-
-    // Adjust mouse position z to match the distance to the camera
-    // This should be the absolute value if the camera is looking at the origin from a negative z
-    mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
-
-    // Convert the mouse position to world coordinates
-    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-
-    // Ensure the bullet doesn't move along the z-axis
-    mouseWorldPosition.z = 0;
-
-    // Calculate the shooting direction
-    Vector3 shootingDirection = (mouseWorldPosition - transform.position).normalized;
-
-    // Instantiate the bullet at the player's position and orient it towards the shooting direction
-    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(Vector3.forward, shootingDirection)) as GameObject;
-    bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-    bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
-}
-
-}
->>>>>>> Stashed changes
