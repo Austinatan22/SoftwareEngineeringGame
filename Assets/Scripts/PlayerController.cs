@@ -3,12 +3,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float speed;
-    Rigidbody2D rigidbody;
+    private Rigidbody2D rigidbody;
     public Text collectedText;
     public static int collectedAmount = 0;
-
 
     public GameObject bulletPrefab;
     public float bulletSpeed;
@@ -29,26 +27,39 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        float shootHor = Input.GetAxis("ShootHorizontal");
-        float shootVert = Input.GetAxis("ShootVertical");
-        if ((shootHor != 0 || shootVert != 0) && Time.time > lastFire + fireDelay)
-        {
-            Shoot(shootHor, shootVert);
-            lastFire = Time.time;
-        }
-
+        // Update movement
         rigidbody.velocity = new Vector3(horizontal * speed, vertical * speed, 0);
         collectedText.text = "Items Collected: " + collectedAmount;
+
+        // Check if left mouse button was clicked and if the firing delay has passed
+        if (Input.GetMouseButton(0) && Time.time > lastFire + fireDelay)
+        {
+            ShootTowardsMouse();
+            lastFire = Time.time;
+        }
     }
 
-    void Shoot(float x, float y)
+    void ShootTowardsMouse()
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation) as GameObject;
+        // Get the mouse position in screen coordinates
+        Vector3 mouseScreenPosition = Input.mousePosition;
+
+        // Adjust mouse position z to match the distance to the camera
+        // This should be the absolute value if the camera is looking at the origin from a negative z
+        mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
+
+        // Convert the mouse position to world coordinates
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+
+        // Ensure the bullet doesn't move along the z-axis
+        mouseWorldPosition.z = 0;
+
+        // Calculate the shooting direction
+        Vector3 shootingDirection = (mouseWorldPosition - transform.position).normalized;
+
+        // Instantiate the bullet at the player's position and orient it towards the shooting direction
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(Vector3.forward, shootingDirection)) as GameObject;
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-        bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(
-            (x < 0) ? Mathf.Floor(x) * bulletSpeed : Mathf.Ceil(x) * bulletSpeed,
-            (y < 0) ? Mathf.Floor(y) * bulletSpeed : Mathf.Ceil(y) * bulletSpeed,
-            0
-        );
+        bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
     }
 }

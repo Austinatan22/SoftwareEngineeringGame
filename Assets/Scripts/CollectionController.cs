@@ -67,14 +67,22 @@ public class CollectionController : MonoBehaviour
         else if (playerInRange && Input.GetKeyDown(KeyCode.F) && gameObject.tag == "Shop")
         {
             // CurrencyManager.instance.SpendCurrency
-            PlayerController.collectedAmount++;
-            GameController.HealPlayer(healthChange);
-            GameController.MoveSpeedChange(moveSpeedChange);
-            GameController.FireRateChange(attackSpeedChange);
-            GameController.BulletSizeChange(bulletSizeChange);
-            GameController.instance.UpdateCollectedItems(this);
-            CurrencyManager.instance.SpendCurrency(cost);
-            Destroy(gameObject);  // Destroy item after pickup
+            if (CurrencyManager.instance.currencyAmount >= cost)
+            {
+                PlayerController.collectedAmount++;
+                GameController.HealPlayer(healthChange);
+                GameController.MoveSpeedChange(moveSpeedChange);
+                GameController.FireRateChange(attackSpeedChange);
+                GameController.BulletSizeChange(bulletSizeChange);
+                GameController.instance.UpdateCollectedItems(this);
+                CurrencyManager.instance.SpendCurrency(cost);
+                Destroy(gameObject);  // Destroy item after pickup
+            }
+        }
+        else if (playerInRange && gameObject.tag == "Key")
+        {
+            GameController.isKeyAcquired = true;
+            Destroy(gameObject);
         }
         else if (playerInRange && gameObject.tag == "Coin")
         {

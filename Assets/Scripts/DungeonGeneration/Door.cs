@@ -10,11 +10,12 @@ public class Door : MonoBehaviour
     }
 
     public DoorType doorType;
-    
+
     public GameObject doorCollider;
 
     private GameObject player;
     private float widthOffset = 4f;
+
 
     private void Start()
     {
@@ -23,9 +24,9 @@ public class Door : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            switch(doorType)
+            switch (doorType)
             {
                 case DoorType.bottom:
                     player.transform.position = new Vector2(transform.position.x, transform.position.y - widthOffset);

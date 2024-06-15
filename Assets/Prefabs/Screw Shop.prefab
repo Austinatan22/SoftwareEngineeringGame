@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6044479761511570031}
   - component: {fileID: 6044479761511570030}
   - component: {fileID: 6044479761511570028}
+  - component: {fileID: 949176008038831649}
   m_Layer: 0
   m_Name: Screw Shop
   m_TagString: Shop
@@ -106,3 +107,25 @@ MonoBehaviour:
   attackSpeedChange: 0.25
   bulletSizeChange: 0.25
   cost: 7
+--- !u!114 &949176008038831649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6044479761511570024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c259e41f511b54ba434a8afeeedece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    dialogueLines:
+    - character:
+        name: 
+        icon: {fileID: 0}
+      line: Would you like to buy a SCREW!!!
+    - character:
+        name: 
+        icon: {fileID: 0}
+      line: Costs for 7 coins.

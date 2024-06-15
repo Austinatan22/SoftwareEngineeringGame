@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4782007233362905210}
   - component: {fileID: 4782007233362905209}
   - component: {fileID: 4782007233362905211}
+  - component: {fileID: 529863781663761610}
   m_Layer: 0
   m_Name: Boot Shop
   m_TagString: Shop
@@ -106,3 +107,25 @@ MonoBehaviour:
   attackSpeedChange: 0
   bulletSizeChange: 0
   cost: 5
+--- !u!114 &529863781663761610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782007233362905191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c259e41f511b54ba434a8afeeedece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    dialogueLines:
+    - character:
+        name: 
+        icon: {fileID: 0}
+      line: Would you like to buy a BOOT!!!
+    - character:
+        name: 
+        icon: {fileID: 0}
+      line: Costs for 4 coins.
