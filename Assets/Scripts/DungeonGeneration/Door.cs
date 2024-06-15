@@ -8,11 +8,10 @@ public class Door : MonoBehaviour
     {
         left, right, top, bottom
     }
-
     public DoorType doorType;
 
     public GameObject doorCollider;
-
+    public GameObject keyArea;
     private GameObject player;
     private float widthOffset = 4f;
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections; // Add this line
 
 [System.Serializable]
 public class Item
@@ -16,11 +15,10 @@ public class CollectionController : MonoBehaviour
     public float moveSpeedChange;
     public float attackSpeedChange;
     public float bulletSizeChange;
+    public float cost;
 
-    public float floatSpeed = 1f; // Speed of floating up and down
-    public float floatAmount = 0.2f; // Amount of floating up and down
-
-    private Vector3 initialPosition;
+    private bool playerInRange = false;
+    private bool isKeyAcquired = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,24 +34,28 @@ public class CollectionController : MonoBehaviour
 
         polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
         polygonCollider.isTrigger = true; // Set the collider to be a trigger
-
-        initialPosition = transform.position;
-        StartCoroutine(FloatAnimation());
-    }
-
-    private IEnumerator FloatAnimation()
-    {
-        while (true)
-        {
-            float newY = Mathf.Sin(Time.time * floatSpeed) * floatAmount;
-            transform.position = new Vector3(initialPosition.x, initialPosition.y + newY, initialPosition.z);
-            yield return null;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
+        {
+            playerInRange = true;  // Player enters the trigger zone
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            playerInRange = false;  // Player leaves the trigger zone
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.F) && gameObject.tag == "Dropped")  // Check if 'F' is pressed while player is in range
         {
             PlayerController.collectedAmount++;
             GameController.HealPlayer(healthChange);
@@ -61,6 +63,27 @@ public class CollectionController : MonoBehaviour
             GameController.FireRateChange(attackSpeedChange);
             GameController.BulletSizeChange(bulletSizeChange);
             GameController.instance.UpdateCollectedItems(this);
+            Destroy(gameObject);  // Destroy item after pickup
+        }
+        else if (playerInRange && Input.GetKeyDown(KeyCode.F) && gameObject.tag == "Shop")
+        {
+            // CurrencyManager.instance.SpendCurrency
+            PlayerController.collectedAmount++;
+            GameController.HealPlayer(healthChange);
+            GameController.MoveSpeedChange(moveSpeedChange);
+            GameController.FireRateChange(attackSpeedChange);
+            GameController.BulletSizeChange(bulletSizeChange);
+            GameController.instance.UpdateCollectedItems(this);
+            Destroy(gameObject);  // Destroy item after pickup
+        }
+        else if (playerInRange && gameObject.tag == "Key")
+        {
+            isKeyAcquired = true;
+            Destroy(gameObject);
+        }
+        else if (playerInRange && gameObject.tag == "Coin")
+        {
+            CurrencyManager.instance.AddCurrency(1);
             Destroy(gameObject);
         }
     }

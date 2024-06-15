@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
     public List<string> collectedNames = new List<string>();
     public GameOverManager gameOverManager;
-    public static bool isKeyAcquired;
+    public bool isKeyAcquired = true;
 
     public static float Health { get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }

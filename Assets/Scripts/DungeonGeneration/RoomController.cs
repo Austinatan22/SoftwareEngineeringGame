@@ -53,7 +53,7 @@ public class RoomController : MonoBehaviour
         UpdateRoomQueue(); // Call UpdateRoomQueue every frame
     }
 
-    void UpdateRoomQueue()
+    public void UpdateRoomQueue()
     {
         if (isLoadingRoom)
         {
