@@ -27,6 +27,9 @@ public class GameController : MonoBehaviour
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public static float FireRate { get => fireRate; set => fireRate = value; }
     public static float BulletSize { get => bulletSize; set => bulletSize = value; }
+    
+    public GameObject lowHealthCanvas; // Canvas to be shown at low health
+    public CanvasGroup lowHealthCanvasGroup;
 
     public Text healthText;
 
@@ -37,12 +40,25 @@ public class GameController : MonoBehaviour
         {
             instance = this;
         }
+
+        lowHealthCanvas.SetActive(true);
+        lowHealthCanvasGroup.alpha = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         healthText.text = "Health: " + health;
+
+        if (Health == 1)
+        {
+            lowHealthCanvasGroup.alpha = 1; // Fully visible
+        }
+        else if (Health > 1)
+        {
+            lowHealthCanvasGroup.alpha = Mathf.Max(0, lowHealthCanvasGroup.alpha - Time.deltaTime * 0.5f); // Fade out
+        }
+        
     }
 
     public static void DamagePlayer(int damage)

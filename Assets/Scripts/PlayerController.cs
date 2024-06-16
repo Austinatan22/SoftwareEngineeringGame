@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -9,21 +10,23 @@ public class PlayerController : MonoBehaviour
     public static int collectedAmount = 0;
 
     public GameObject bulletPrefab;
+    public GameObject gun;  // Reference to the gun object
     public float bulletSpeed;
     private float lastFire;
     public float fireDelay;
+    public float gunDistanceFromPlayer = 1.0f;  // Distance of the gun from the player
 
     public Animator animator;
 
-    private bool isFacingRight = true; // To keep track of the player's facing direction
+    private bool isFacingRight = true;
 
-    // Start is called before the first frame update
+    private Vector2 lastMovementDirection; // Stores the last non-zero movement direction
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         fireDelay = GameController.FireRate;
@@ -33,32 +36,36 @@ public class PlayerController : MonoBehaviour
 
         Vector2 moveInput = new Vector2(horizontal, vertical);
 
-        // Normalize the movement vector if it's longer than 1
         if (moveInput.magnitude > 1)
         {
             moveInput.Normalize();
         }
 
-        // Set animator parameters
-        animator.SetFloat("Horizontal", horizontal);
-        animator.SetFloat("Vertical", vertical);
-        animator.SetFloat("Speed", rigidbody.velocity.magnitude);
+        if (moveInput != Vector2.zero) // Check if there is any movement
+        {
+            lastMovementDirection = moveInput; // Update the last movement direction when moving
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
+        }
+        else
+        {
+            // Keep the last direction in the animator when stopping
+            animator.SetFloat("Horizontal", lastMovementDirection.x);
+            animator.SetFloat("Vertical", lastMovementDirection.y);
+        }
 
-        // Update movement
+        animator.SetFloat("Speed", rigidbody.velocity.magnitude);
         rigidbody.velocity = moveInput * speed;
         collectedText.text = "Items Collected: " + collectedAmount;
 
-        // Flip the player sprite based on movement direction
-        if (horizontal > 0 && !isFacingRight)
-        {
-            Flip();
-        }
-        else if (horizontal < 0 && isFacingRight)
+        if (horizontal > 0 && !isFacingRight || horizontal < 0 && isFacingRight)
         {
             Flip();
         }
 
-        // Check if left mouse button was clicked and if the firing delay has passed
+        UpdateGunPosition();
+        AimGunAtMouse();
+
         if (Input.GetMouseButton(0) && Time.time > lastFire + fireDelay)
         {
             ShootTowardsMouse();
@@ -66,18 +73,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ShootTowardsMouse()
+    void UpdateGunPosition()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         mouseWorldPosition.z = 0;
-        Vector3 shootingDirection = (mouseWorldPosition - transform.position).normalized;
-
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(Vector3.forward, shootingDirection)) as GameObject;
-        bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-        bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
+        
+        Vector3 direction = (mouseWorldPosition - transform.position).normalized;
+        gun.transform.position = transform.position + direction * gunDistanceFromPlayer;
     }
+
+    void AimGunAtMouse()
+{
+    Vector3 mouseScreenPosition = Input.mousePosition;
+    mouseScreenPosition.z = Mathf.Abs(Camera.main.transform.position.z);
+    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+    mouseWorldPosition.z = 0;
+    
+    Vector3 direction = (mouseWorldPosition - gun.transform.position).normalized;
+    gun.transform.up = direction;
+
+    // Calculate the angle from the player to the mouse in degrees
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+    // Flip the gun horizontally based on the angle
+    if (angle > 90 || angle < -90)
+    {
+        // When the gun is to the left of the player
+        gun.transform.localScale = new Vector3(-1, 1, 1); // Flip horizontally
+    }
+    else
+    {
+        // When the gun is to the right of the player
+        gun.transform.localScale = new Vector3(1, 1, 1); // Normal scale
+    }
+}
+
+
+
+    void ShootTowardsMouse()
+{
+    GameObject bullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.LookRotation(Vector3.forward, gun.transform.up)) as GameObject;
+    bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+    bullet.GetComponent<Rigidbody2D>().velocity = gun.transform.up * bulletSpeed;
+
+    // Trigger the shooting animation
+    gun.GetComponent<Animator>().SetTrigger("Shoot");
+}
+
 
     void Flip()
     {
@@ -85,5 +129,8 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        
+        // Ensure the gun does not flip with the player
+        gun.transform.localScale = new Vector3(Mathf.Abs(gun.transform.localScale.x), gun.transform.localScale.y, gun.transform.localScale.z);
     }
 }
