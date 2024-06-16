@@ -28,7 +28,7 @@ public class RoomController : MonoBehaviour
     Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>(); // Queue of rooms to be loaded
 
     public List<Room> loadedRooms = new List<Room>(); // List of rooms that have been loaded
-
+    bool roomOpened = true;
     bool isLoadingRoom = false; // Tracks if a room is currently being loaded
     bool spawnedBossRoom = false; // Tracks if the boss room has been spawned
     bool updatedRooms = false; // Tracks if rooms have been updated after spawning the boss room
@@ -257,12 +257,19 @@ public class RoomController : MonoBehaviour
                 }
                 else
                 {
+                    roomOpened = false;
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         if (door.tag != "bossDoor")
                         {
                             door.doorCollider.SetActive(false); // Deactivate door colliders in rooms without enemies
                         }
+                    }
+                    if (roomOpened != true)
+                    {
+                        RandomItem.instance.SpawnItems();
+                        Debug.Log("NOT FUCKING WORKING");
+                        roomOpened = true;
                     }
                 }
             }
@@ -279,5 +286,9 @@ public class RoomController : MonoBehaviour
                 room.bossDoors(); // Call bossDoors function for the end room
             }
         }
+    }
+    public int GetTotalRoomCount()
+    {
+        return loadedRooms.Count;
     }
 }
