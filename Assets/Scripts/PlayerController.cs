@@ -1,4 +1,4 @@
-﻿using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,8 +109,6 @@ public class PlayerController : MonoBehaviour
         gun.transform.localScale = new Vector3(1, 1, 1); // Normal scale
     }
 }
-
-
 
     void ShootTowardsMouse()
 {

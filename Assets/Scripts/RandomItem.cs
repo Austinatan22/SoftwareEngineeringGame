@@ -27,6 +27,12 @@ public class RandomItem : MonoBehaviour
 
     public void SpawnItems()
     {
+        if (spawnPoint == null)
+    {
+        Debug.LogError("Spawn point is not assigned or has been destroyed.");
+        return;
+    }
+
         int droppableRooms = totalRooms - nonDropRooms;
 
         GameObject itemToSpawn;
