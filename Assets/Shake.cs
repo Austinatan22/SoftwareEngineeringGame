@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Shake : MonoBehaviour
 {
-    public bool start = false;
+    public static bool shake = false;
     public AnimationCurve curve;
     public float duration = 1f;
     void Update()
     {
-        if (start)
+        if (shake)
         {
-            start = false;
+            shake = false;
             StartCoroutine(Shaking());
         }
     }

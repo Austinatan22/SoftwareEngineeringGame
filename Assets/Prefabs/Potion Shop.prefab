@@ -129,3 +129,4 @@ MonoBehaviour:
         name: 
         icon: {fileID: 0}
       line: Costs for 3 coins.
+  Trigger: {fileID: 4782007233362905191, guid: 0cf4c67b150ea4d48941d5f55b703fcd, type: 3}

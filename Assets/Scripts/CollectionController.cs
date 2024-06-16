@@ -15,17 +15,27 @@ public class CollectionController : MonoBehaviour
     public float moveSpeedChange;
     public float attackSpeedChange;
     public float bulletSizeChange;
-    public float cost;
-
+    public int cost;
+    public static CollectionController instance;
     private bool playerInRange = false;
-    private bool isKeyAcquired = false;
+    public static bool isKeyAcquired = false;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = item.itemImage;
 
-        // Destroy the existing PolygonCollider2D if it exists and add a new one
         PolygonCollider2D polygonCollider = GetComponent<PolygonCollider2D>();
         if (polygonCollider != null)
         {
@@ -33,14 +43,14 @@ public class CollectionController : MonoBehaviour
         }
 
         polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
-        polygonCollider.isTrigger = true; // Set the collider to be a trigger
+        polygonCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            playerInRange = true;  // Player enters the trigger zone
+            playerInRange = true;
         }
     }
 
@@ -48,43 +58,52 @@ public class CollectionController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            playerInRange = false;  // Player leaves the trigger zone
+            playerInRange = false;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.F) && gameObject.tag == "Dropped")  // Check if 'F' is pressed while player is in range
+        if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
-            PlayerController.collectedAmount++;
-            GameController.HealPlayer(healthChange);
-            GameController.MoveSpeedChange(moveSpeedChange);
-            GameController.FireRateChange(attackSpeedChange);
-            GameController.BulletSizeChange(bulletSizeChange);
-            GameController.instance.UpdateCollectedItems(this);
-            Destroy(gameObject);  // Destroy item after pickup
+            if (gameObject.tag == "Dropped")
+            {
+                PickUpItem();
+            }
+            else if (gameObject.tag == "Key")
+            {
+                isKeyAcquired = true;
+                Destroy(gameObject);
+            }
+            else if (gameObject.tag == "Coin")
+            {
+                CurrencyManager.instance.AddCurrency(1);
+                Destroy(gameObject);
+            }
         }
-        else if (playerInRange && Input.GetKeyDown(KeyCode.F) && gameObject.tag == "Shop")
+    }
+
+    private void PickUpItem()
+    {
+        PlayerController.collectedAmount++;
+        GameController.HealPlayer(healthChange);
+        GameController.MoveSpeedChange(moveSpeedChange);
+        GameController.FireRateChange(attackSpeedChange);
+        GameController.BulletSizeChange(bulletSizeChange);
+        GameController.instance.UpdateCollectedItems(this);
+        Destroy(gameObject);
+    }
+
+    public void buyShopItem()
+    {
+        if (CurrencyManager.instance.currencyAmount >= cost)
         {
-            // CurrencyManager.instance.SpendCurrency
-            PlayerController.collectedAmount++;
-            GameController.HealPlayer(healthChange);
-            GameController.MoveSpeedChange(moveSpeedChange);
-            GameController.FireRateChange(attackSpeedChange);
-            GameController.BulletSizeChange(bulletSizeChange);
-            GameController.instance.UpdateCollectedItems(this);
-            Destroy(gameObject);  // Destroy item after pickup
+            CurrencyManager.instance.SpendCurrency(cost);
+            PickUpItem();
         }
-        else if (playerInRange && gameObject.tag == "Key")
+        else
         {
-            isKeyAcquired = true;
-            Destroy(gameObject);
-        }
-        else if (playerInRange && gameObject.tag == "Coin")
-        {
-            CurrencyManager.instance.AddCurrency(1);
-            Destroy(gameObject);
+            Debug.Log("Not enough currency.");
         }
     }
 }

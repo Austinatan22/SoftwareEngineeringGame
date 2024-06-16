@@ -24,19 +24,38 @@ public class Dialogue
 
 public class DialogueTrigger : MonoBehaviour
 {
+    public static DialogueTrigger instance;
     public Dialogue dialogue;
+    public GameObject Trigger;
+    private CollectionController collectionController;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        collectionController = GetComponent<CollectionController>();
+    }
 
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(dialogue);
+        DialogueManager.Instance.StartDialogue(dialogue, collectionController);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-
+            DialogueManager.Instance.Box.SetActive(true);
             TriggerDialogue();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            DialogueManager.Instance.Box.SetActive(false);
         }
     }
 }

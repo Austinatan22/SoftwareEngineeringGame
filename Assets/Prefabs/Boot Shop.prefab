@@ -106,7 +106,7 @@ MonoBehaviour:
   moveSpeedChange: 1
   attackSpeedChange: 0
   bulletSizeChange: 0
-  cost: 5
+  cost: 4
 --- !u!114 &529863781663761610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +129,4 @@ MonoBehaviour:
         name: 
         icon: {fileID: 0}
       line: Costs for 4 coins.
+  Trigger: {fileID: 4782007233362905191}

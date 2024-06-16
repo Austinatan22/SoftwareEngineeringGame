@@ -4,9 +4,27 @@ using UnityEngine;
 
 public class KeyArea : MonoBehaviour
 {
+    private bool playerInArea = false;
+
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.tag == "Player" && CollectionController.isKeyAcquired == true)
+        {
+            playerInArea = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
         if (other.tag == "Player")
+        {
+            playerInArea = false;
+        }
+    }
+
+    void Update()
+    {
+        if (playerInArea && Input.GetKeyDown(KeyCode.F))
         {
             unlock();
         }
@@ -23,9 +41,12 @@ public class KeyArea : MonoBehaviour
             if (door.tag == "bossDoor")
             {
                 door.gameObject.tag = "Untagged";
-                RoomController.instance.UpdateRooms();
+                door.doorCollider.SetActive(false); // Unlock the door by deactivating the collider
             }
         }
+
+        // Call the UpdateRooms method from RoomController
+        RoomController.instance.UpdateRooms();
 
         // Optionally, you can change the door's tag or perform other actions
         // such as playing an animation or sound effect
