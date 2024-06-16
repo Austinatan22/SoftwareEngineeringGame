@@ -163,47 +163,62 @@ public class Room : MonoBehaviour
                 switch (door.doorType)
                 {
                     case Door.DoorType.right:
-                        // Enable left door collider if adjacent room is to the right of the end room
-                        if (deltaX < 0)
+                        if (deltaX < 0) // Adjacent room is to the right
+                        {
                             door.gameObject.tag = "bossDoor"; // Change the door's tag to "bossDoor"
                             door.doorCollider.SetActive(true);
+                            if (door.keyArea != null)
+                            {
+                                door.keyArea.SetActive(true); // Activate the keyArea
+                            }
+                        }
                         break;
                     case Door.DoorType.left:
-                        // Enable right door collider if adjacent room is to the left of the end room
-                        if (deltaX > 0)
+                        if (deltaX > 0) // Adjacent room is to the left
+                        {
                             door.gameObject.tag = "bossDoor"; // Change the door's tag to "bossDoor"
                             door.doorCollider.SetActive(true);
+                            if (door.keyArea != null)
+                            {
+                                door.keyArea.SetActive(true); // Activate the keyArea
+                            }
+                        }
                         break;
                     case Door.DoorType.top:
-                        // Enable bottom door collider if adjacent room is below the end room
-                        if (deltaY < 0)
+                        if (deltaY < 0) // Adjacent room is above
+                        {
                             door.gameObject.tag = "bossDoor"; // Change the door's tag to "bossDoor"
                             door.doorCollider.SetActive(true);
+                            if (door.keyArea != null)
+                            {
+                                door.keyArea.SetActive(true); // Activate the keyArea
+                            }
+                        }
                         break;
                     case Door.DoorType.bottom:
-                        // Enable top door collider if adjacent room is above the end room
-                        if (deltaY > 0)
+                        if (deltaY > 0) // Adjacent room is below
+                        {
                             door.gameObject.tag = "bossDoor"; // Change the door's tag to "bossDoor"
                             door.doorCollider.SetActive(true);
+                            if (door.keyArea != null)
+                            {
+                                door.keyArea.SetActive(true); // Activate the keyArea
+                            }
+                        }
                         break;
                 }
             }
         }
     }
-
-
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
     }
-
     public Vector3 GetRoomCentre()
     {
         return new Vector3(X * Width, Y * Height);
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

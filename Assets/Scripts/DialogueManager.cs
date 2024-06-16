@@ -13,12 +13,14 @@ public class DialogueManager : MonoBehaviour
 	public TextMeshProUGUI dialogueArea;
 
 	private Queue<DialogueLine> lines;
+	public GameObject Box;
 
 	public bool isDialogueActive = false;
 
-	public float typingSpeed = 0.2f;
+	public float typingSpeed = 0.001f;
 
-	// public Animator animator;
+	// Reference to the item being considered for purchase
+	private CollectionController currentShopItem;
 
 	private void Awake()
 	{
@@ -28,11 +30,18 @@ public class DialogueManager : MonoBehaviour
 		lines = new Queue<DialogueLine>();
 	}
 
-	public void StartDialogue(Dialogue dialogue)
+	private void Update()
+	{
+		if (isDialogueActive && Input.GetKeyDown(KeyCode.Space))
+		{
+			DisplayNextDialogueLine();
+		}
+	}
+
+	public void StartDialogue(Dialogue dialogue, CollectionController shopItem = null)
 	{
 		isDialogueActive = true;
-
-		// animator.Play("show");
+		currentShopItem = shopItem;
 
 		lines.Clear();
 
@@ -54,9 +63,6 @@ public class DialogueManager : MonoBehaviour
 
 		DialogueLine currentLine = lines.Dequeue();
 
-		// characterIcon.sprite = currentLine.character.icon;
-		// characterName.text = currentLine.character.name;
-
 		StopAllCoroutines();
 
 		StartCoroutine(TypeSentence(currentLine));
@@ -75,6 +81,20 @@ public class DialogueManager : MonoBehaviour
 	void EndDialogue()
 	{
 		isDialogueActive = false;
-		// animator.Play("hide");
+		Box.SetActive(false);
+	}
+
+	public void BuyItem()
+	{
+		if (currentShopItem != null)
+		{
+			currentShopItem.buyShopItem();
+			EndDialogue();
+		}
+	}
+
+	public void Cancel()
+	{
+		EndDialogue();
 	}
 }

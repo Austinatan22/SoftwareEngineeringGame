@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections; // Add this line
 
 [System.Serializable]
 public class Item
@@ -16,18 +15,27 @@ public class CollectionController : MonoBehaviour
     public float moveSpeedChange;
     public float attackSpeedChange;
     public float bulletSizeChange;
+    public int cost;
+    public static CollectionController instance;
+    private bool playerInRange = false;
+    public static bool isKeyAcquired = false;
 
-    public float floatSpeed = 1f; // Speed of floating up and down
-    public float floatAmount = 0.2f; // Amount of floating up and down
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    private Vector3 initialPosition;
-
-    // Start is called before the first frame update
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = item.itemImage;
 
-        // Destroy the existing PolygonCollider2D if it exists and add a new one
         PolygonCollider2D polygonCollider = GetComponent<PolygonCollider2D>();
         if (polygonCollider != null)
         {
@@ -35,33 +43,67 @@ public class CollectionController : MonoBehaviour
         }
 
         polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
-        polygonCollider.isTrigger = true; // Set the collider to be a trigger
-
-        initialPosition = transform.position;
-        StartCoroutine(FloatAnimation());
-    }
-
-    private IEnumerator FloatAnimation()
-    {
-        while (true)
-        {
-            float newY = Mathf.Sin(Time.time * floatSpeed) * floatAmount;
-            transform.position = new Vector3(initialPosition.x, initialPosition.y + newY, initialPosition.z);
-            yield return null;
-        }
+        polygonCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            PlayerController.collectedAmount++;
-            GameController.HealPlayer(healthChange);
-            GameController.MoveSpeedChange(moveSpeedChange);
-            GameController.FireRateChange(attackSpeedChange);
-            GameController.BulletSizeChange(bulletSizeChange);
-            GameController.instance.UpdateCollectedItems(this);
-            Destroy(gameObject);
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            playerInRange = false;
+        }
+    }
+
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.F))
+        {
+            if (gameObject.tag == "Dropped")
+            {
+                PickUpItem();
+            }
+            else if (gameObject.tag == "Key")
+            {
+                isKeyAcquired = true;
+                Destroy(gameObject);
+            }
+            else if (gameObject.tag == "Coin")
+            {
+                CurrencyManager.instance.AddCurrency(1);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void PickUpItem()
+    {
+        PlayerController.collectedAmount++;
+        GameController.HealPlayer(healthChange);
+        GameController.MoveSpeedChange(moveSpeedChange);
+        GameController.FireRateChange(attackSpeedChange);
+        GameController.BulletSizeChange(bulletSizeChange);
+        GameController.instance.UpdateCollectedItems(this);
+        Destroy(gameObject);
+    }
+
+    public void buyShopItem()
+    {
+        if (CurrencyManager.instance.currencyAmount >= cost)
+        {
+            CurrencyManager.instance.SpendCurrency(cost);
+            PickUpItem();
+        }
+        else
+        {
+            Debug.Log("Not enough currency.");
         }
     }
 }

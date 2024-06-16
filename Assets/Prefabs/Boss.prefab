@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4782007233362905191
+--- !u!1 &5165356741691102901
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4782007233362905210}
-  - component: {fileID: 4782007233362905209}
-  - component: {fileID: 4782007233362905211}
-  - component: {fileID: 529863781663761610}
+  - component: {fileID: 8810135012076644012}
+  - component: {fileID: 3844707130012353443}
+  - component: {fileID: 6373160875116278696}
+  - component: {fileID: 4983346652286215485}
   m_Layer: 0
-  m_Name: Boot Shop
-  m_TagString: Shop
+  m_Name: Boss
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4782007233362905210
+--- !u!4 &8810135012076644012
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782007233362905191}
+  m_GameObject: {fileID: 5165356741691102901}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.97, y: -2.71, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.5427654, y: 2.0854256, z: 3.124639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4782007233362905209
+--- !u!212 &3844707130012353443
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782007233362905191}
+  m_GameObject: {fileID: 5165356741691102901}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e955800dedc3414c91e21bf7a9d6c44, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,47 +87,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4782007233362905211
+--- !u!114 &6373160875116278696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782007233362905191}
+  m_GameObject: {fileID: 5165356741691102901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fc9e4851ded7e4095ae00338a80f0f, type: 3}
+  m_Script: {fileID: 11500000, guid: f922c4ac0d07fb34da035880deee7666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    name: Boot
-    description: Increase move speed by 1.
-    itemImage: {fileID: 21300000, guid: f226144a22f99b844b7db178d4455621, type: 3}
-  healthChange: 0
-  moveSpeedChange: 1
-  attackSpeedChange: 0
-  bulletSizeChange: 0
-  cost: 4
---- !u!114 &529863781663761610
-MonoBehaviour:
+  player: {fileID: 4725445783789383760, guid: 599cc7ae311d4a949beb67a60dc38dbe, type: 3}
+  currState: 0
+  detectionRange: 10
+  speed: 5
+  specialAttackDuration: 10
+  health: 100
+  notInRoom: 0
+--- !u!50 &4983346652286215485
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782007233362905191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c259e41f511b54ba434a8afeeedece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    dialogueLines:
-    - character:
-        name: 
-        icon: {fileID: 0}
-      line: Would you like to buy a BOOT!!!
-    - character:
-        name: 
-        icon: {fileID: 0}
-      line: Costs for 4 coins.
-  Trigger: {fileID: 4782007233362905191}
+  m_GameObject: {fileID: 5165356741691102901}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

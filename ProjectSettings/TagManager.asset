@@ -12,6 +12,7 @@ TagManager:
   - Coin
   - Shop
   - bossDoor
+  - Key
   layers:
   - Default
   - TransparentFX

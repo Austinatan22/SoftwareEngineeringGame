@@ -129,3 +129,4 @@ MonoBehaviour:
         name: 
         icon: {fileID: 0}
       line: Costs for 7 coins.
+  Trigger: {fileID: 6044479761511570024}
