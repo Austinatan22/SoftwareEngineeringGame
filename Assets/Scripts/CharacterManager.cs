@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 
 
@@ -13,6 +15,14 @@ public class CharacterManager : MonoBehaviour
     private int selectedOption = 0;
     void Start()
     {
+        if (PlayerPrefs.HasKey("selectedOption"))
+        {
+            selectedOption = 0;
+        }
+        else
+        {
+            Load();
+        }
         UpdateCharacter(selectedOption);
     }
 
@@ -30,6 +40,7 @@ public class CharacterManager : MonoBehaviour
         }
 
         UpdateCharacter(selectedOption);
+        Save();
     }
 
     public void BackOption()
@@ -41,6 +52,7 @@ public class CharacterManager : MonoBehaviour
         }
 
         UpdateCharacter(selectedOption);
+        Save();
     }
 
     private void UpdateCharacter(int selectedOption)
@@ -48,5 +60,28 @@ public class CharacterManager : MonoBehaviour
         CharacterSelect character = characterDB.getCharacter(selectedOption);
         artworkSprite.sprite = character.characterSprite;
         nameText.text = character.characterName;
+    }
+    private void Load()
+    {
+        selectedOption = PlayerPrefs.GetInt("selectedOption");
+    }
+    private void Save()
+    {
+        PlayerPrefs.SetInt("selectedOption", selectedOption);
+    }
+    public void PlayGame()
+    {
+        if (GameController.firstTime)
+        {
+            // Set firstTime to false after the first run
+            GameController.firstTime = false;
+            // Load the Animation scene first
+            SceneManager.LoadScene("Animation");
+        }
+        else
+        {
+            // Load the BasementMain scene directly
+            SceneManager.LoadScene("BasementMain");
+        }
     }
 }

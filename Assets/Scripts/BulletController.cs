@@ -54,9 +54,14 @@ public class BulletController : MonoBehaviour
         if (col.tag == "Enemy" && !isEnemyBullet)
         {
             EnemyController enemyController = col.GetComponent<EnemyController>();
+            EnemyBombController enemyBombController = col.GetComponent<EnemyBombController>();
             if (enemyController != null)
             {
                 enemyController.DamageEnemy(1);
+            }
+            if (enemyBombController != null)
+            {
+                enemyBombController.DamageEnemy(1);
             }
             Destroy(gameObject);
         }

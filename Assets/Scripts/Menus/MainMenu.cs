@@ -5,18 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        if (GameController.firstTime)
-        {
-            // Set firstTime to false after the first run
-            GameController.firstTime = false;
-            // Load the Animation scene first
-            SceneManager.LoadScene("Animation");
-        }
-        else
-        {
-            // Load the BasementMain scene directly
-            SceneManager.LoadScene("BasementMain");
-        }
+        SceneManager.LoadScene("CharacterSelection");
     }
 
     public void Hidden()

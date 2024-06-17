@@ -132,9 +132,13 @@ MonoBehaviour:
   collectedText: {fileID: 0}
   bulletPrefab: {fileID: 8912613753944397765, guid: b02d5786e5afaac479b933a6426437e5,
     type: 3}
+  gun: {fileID: 0}
   bulletSpeed: 15
   fireDelay: 0.5
+  gunDistanceFromPlayer: 1
   animator: {fileID: 8842785305993722380}
+  characterDB: {fileID: 11400000, guid: 236c2691c1c7e344fb37e84795173bf4, type: 2}
+  artworkSprite: {fileID: 5682788300767688074}
 --- !u!61 &6730988296155806226
 BoxCollider2D:
   m_ObjectHideFlags: 0
