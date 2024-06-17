@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4802124998439061761
+--- !u!1 &6796501247517517512
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4802124998439061774}
-  - component: {fileID: 4802124998439061775}
-  - component: {fileID: 4802124998439061773}
-  - component: {fileID: -4240288258604249322}
+  - component: {fileID: 1525435398714460285}
+  - component: {fileID: 8222982609624280624}
+  - component: {fileID: 1063062152776375712}
+  - component: {fileID: 6583699148775060747}
   m_Layer: 0
-  m_Name: Potion
-  m_TagString: Dropped
+  m_Name: ChestPostion
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4802124998439061774
+--- !u!4 &1525435398714460285
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4802124998439061761}
+  m_GameObject: {fileID: 6796501247517517512}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.29, y: 2.09, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4802124998439061775
+--- !u!212 &8222982609624280624
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4802124998439061761}
+  m_GameObject: {fileID: 6796501247517517512}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e955800dedc3414c91e21bf7a9d6c44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ceed0e030dd3ae47aab932e8fe84ac9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,34 +86,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4802124998439061773
+--- !u!114 &1063062152776375712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4802124998439061761}
+  m_GameObject: {fileID: 6796501247517517512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fc9e4851ded7e4095ae00338a80f0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 41deeaf87db8b3e41b6f7d690423d14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    name: Potion
-    description: Gives the player +1 health.
-    itemImage: {fileID: 21300000, guid: 16ed1fdd0ce2d9b439b3970490a6a891, type: 3}
-  healthChange: 1
-  moveSpeedChange: 0
-  attackSpeedChange: 0
-  bulletSizeChange: 0
-  cost: 0
---- !u!58 &-4240288258604249322
-CircleCollider2D:
+--- !u!61 &6583699148775060747
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4802124998439061761}
+  m_GameObject: {fileID: 6796501247517517512}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -136,9 +127,19 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.001786232, y: 0.017769217}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 2.720704, y: 2.9322426}
+  m_EdgeRadius: 0

@@ -20,6 +20,8 @@ public class Room : MonoBehaviour
     public Door rightDoor;
     public Door topDoor;
     public Door bottomDoor;
+    public Door Chest;
+
     public List<Door> doors = new List<Door>();
 
     void Start()
@@ -45,6 +47,9 @@ public class Room : MonoBehaviour
                     topDoor = d;
                     break;
                 case Door.DoorType.bottom:
+                    bottomDoor = d;
+                    break;
+                case Door.DoorType.chest:
                     bottomDoor = d;
                     break;
             }
@@ -88,6 +93,8 @@ public class Room : MonoBehaviour
                     if (GetBottom() == null)
                         door.gameObject.SetActive(false);
                     door.doorCollider.SetActive(true);
+                    break;
+                case Door.DoorType.chest:
                     break;
             }
         }
@@ -205,6 +212,8 @@ public class Room : MonoBehaviour
                                 door.keyArea.SetActive(true); // Activate the keyArea
                             }
                         }
+                        break;
+                    case Door.DoorType.chest:
                         break;
                 }
             }

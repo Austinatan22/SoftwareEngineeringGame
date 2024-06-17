@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     public enum DoorType
     {
-        left, right, top, bottom
+        left, right, top, bottom, chest
     }
     public DoorType doorType;
 
@@ -37,6 +37,9 @@ public class Door : MonoBehaviour
                     player.transform.position = new Vector2(transform.position.x + widthOffset, transform.position.y);
                     break;
                 case DoorType.top:
+                    player.transform.position = new Vector2(transform.position.x, transform.position.y + widthOffset);
+                    break;
+                case DoorType.chest:
                     player.transform.position = new Vector2(transform.position.x, transform.position.y + widthOffset);
                     break;
             }

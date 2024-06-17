@@ -15,7 +15,7 @@ public class RoomInfo
 public class RoomController : MonoBehaviour
 {
     public static RoomController instance; // Singleton instance of RoomController
-
+    private ChestSpawner chestSpawner; // Reference to the ChestSpawner component
     private List<string> possibleRooms = new List<string>() { "Empty", "Basic1", "Shop" }; // List of possible room types
 
     RoomInfo currentLoadRoomData; // Data for the room currently being loaded
@@ -32,7 +32,11 @@ public class RoomController : MonoBehaviour
     bool isLoadingRoom = false; // Tracks if a room is currently being loaded
     bool spawnedBossRoom = false; // Tracks if the boss room has been spawned
     bool updatedRooms = false; // Tracks if rooms have been updated after spawning the boss room
-
+    public int roomAmount;
+    public int roomCleared;
+    private bool itemSpawned;
+    private Chest chest;
+    public bool isKeySpawned = false;
     void Awake()
     {
         instance = this; // Set the singleton instance
@@ -50,6 +54,7 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
+        Debug.LogError(isKeySpawned);
         UpdateRoomQueue(); // Call UpdateRoomQueue every frame
     }
 
@@ -249,7 +254,7 @@ public class RoomController : MonoBehaviour
 
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
-                        if (door.tag != "bossDoor")
+                        if (door.tag != "bossDoor" && door.tag != "Chest")
                         {
                             door.doorCollider.SetActive(true); // Activate door colliders in the current room
                         }
@@ -257,20 +262,20 @@ public class RoomController : MonoBehaviour
                 }
                 else
                 {
-                    roomOpened = false;
+                    roomCleared++;
+                    Debug.LogError("Cleared: " + roomCleared);
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
-                        if (door.tag != "bossDoor")
+                        if (door.tag == "Chest")
+                        {
+                            door.doorCollider.SetActive(true);
+                            door.keyArea.SetActive(true);
+                        }
+                        else if (door.tag != "bossDoor")
                         {
                             door.doorCollider.SetActive(false); // Deactivate door colliders in rooms without enemies
                         }
                     }
-                    // if (roomOpened != true)
-                    // {
-                    //     RandomItem.instance.SpawnItems();
-                    //     Debug.Log("NOT FUCKING WORKING");
-                    //     roomOpened = true;
-                    // }
                 }
             }
         }
