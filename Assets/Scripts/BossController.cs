@@ -1,132 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-
-public enum BossState
-{
-    Idle,
-    Normal,
-    SpecialAttack,
-    Die
-};
 
 public class BossController : MonoBehaviour
 {
-    public Transform player;
-    public BossState currState = BossState.Idle;
-    public float detectionRange = 10f;
-    public float speed = 5f;
-    public float specialAttackDuration = 10f;
-    public int health = 100;
-    private bool isSpecialAttack = false;
-    private float specialAttackTimer = 0f;
-    private float stateDuration = 10f; // Duration for each state
-    private Vector3 moveDirection = Vector3.right;
-    private float changeDirectionTime = 1f;
-    public bool notInRoom = false;
-    private float originalSpeed;
+    public enum BossState { Idle, Attack, Die }
 
-    void Start()
+    public float moveSpeed = 5f;
+    public float attackRange = 10f;
+    public Transform player;
+    public int health = 100;
+
+    private Vector3 moveDirection = new Vector3(1, 1, 0); // Initial diagonal movement
+    private BossState currState = BossState.Idle;
+    private Rigidbody2D rb;
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        originalSpeed = speed;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         switch (currState)
         {
-            case BossState.Normal:
-                ApproachPlayer();
+            case BossState.Idle:
+                CheckPlayerInRange();
                 break;
-            case BossState.SpecialAttack:
-                SpecialAttack();
+            case BossState.Attack:
+                MoveDiagonally();
                 break;
             case BossState.Die:
-                // Possibly play some death animation or effects
+                // Handle death state, possibly do nothing
                 break;
         }
-        ManageState();
-        if (IsPlayerInRange(detectionRange) && currState != BossState.Die)
+    }
+
+    private void CheckPlayerInRange()
+    {
+        if (Vector3.Distance(transform.position, player.position) <= attackRange && currState != BossState.Die)
         {
-            currState = BossState.Normal;
-            speed = originalSpeed;
-        }
-        else
-        {
-            currState = BossState.Idle;
-            speed = originalSpeed;
+            StartAttack();
         }
     }
 
-    private bool IsPlayerInRange(float range)
+    private void StartAttack()
     {
-        return Vector3.Distance(transform.position, player.transform.position) <= detectionRange;
+        currState = BossState.Attack;
+        // Additional attack initialization can go here
     }
 
-    void ApproachPlayer()
+    private void MoveDiagonally()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        // We're setting the velocity directly for continuous movement
+        rb.velocity = moveDirection.normalized * moveSpeed;
     }
 
-    void SpecialAttack()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (changeDirectionTime <= 0)
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Door"))
         {
-            speed = originalSpeed * 2;
-            // Randomly choose between horizontal and vertical movements
-            if (Random.value > 0.5f)
-            {
-                moveDirection = moveDirection == Vector3.right ? Vector3.left : Vector3.right;
-            }
-            else
-            {
-                moveDirection = moveDirection == Vector3.up ? Vector3.down : Vector3.up;
-            }
-            changeDirectionTime = 2.5f; // Change direction every second
-        }
-        else
-        {
-            changeDirectionTime -= Time.deltaTime;
-        }
-        transform.position += moveDirection * (speed * 1.5f * Time.deltaTime);
-    }
-
-    void ManageState()
-    {
-        if (currState != BossState.Die)
-        {
-            specialAttackTimer += Time.deltaTime;
-            if (specialAttackTimer >= stateDuration)
-            {
-                isSpecialAttack = !isSpecialAttack;
-                specialAttackTimer = 0f;
-                currState = isSpecialAttack ? BossState.SpecialAttack : BossState.Normal;
-            }
+            // Reflect the move direction based on the collision normal
+            moveDirection = Vector3.Reflect(moveDirection, collision.contacts[0].normal);
+            rb.velocity = moveDirection.normalized * moveSpeed; // Reapply the new velocity
         }
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if (currState != BossState.Die)
         {
-            currState = BossState.Die;
-            Die();
+            health -= damage;
+            if (health <= 0)
+            {
+                currState = BossState.Die;
+                Die();
+            }
         }
     }
 
-    void Die()
+    private void Die()
     {
-        Debug.Log("Boss defeated!");
+        // Handle the boss's death (play animation, destroy object, etc.)
         Destroy(gameObject);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            GameController.DamagePlayer(20); // Assuming the attack damage is 20
-        }
     }
 }

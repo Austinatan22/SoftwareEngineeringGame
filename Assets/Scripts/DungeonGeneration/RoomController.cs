@@ -265,12 +265,12 @@ public class RoomController : MonoBehaviour
                             door.doorCollider.SetActive(false); // Deactivate door colliders in rooms without enemies
                         }
                     }
-                    if (roomOpened != true)
-                    {
-                        RandomItem.instance.SpawnItems();
-                        Debug.Log("NOT FUCKING WORKING");
-                        roomOpened = true;
-                    }
+                    // if (roomOpened != true)
+                    // {
+                    //     RandomItem.instance.SpawnItems();
+                    //     Debug.Log("NOT FUCKING WORKING");
+                    //     roomOpened = true;
+                    // }
                 }
             }
         }

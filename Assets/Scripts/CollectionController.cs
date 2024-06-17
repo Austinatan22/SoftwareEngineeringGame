@@ -16,21 +16,8 @@ public class CollectionController : MonoBehaviour
     public float attackSpeedChange;
     public float bulletSizeChange;
     public int cost;
-    public static CollectionController instance;
     private bool playerInRange = false;
     public static bool isKeyAcquired = false;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {
