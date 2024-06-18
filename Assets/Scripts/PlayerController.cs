@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource walkingAudioSource;  // Separate AudioSource for walking sound
     public AudioClip walkingSound;
     private float walkingSoundTimer = 0.0f;  // Timer to track walking sound minimum play time
-    private bool isPlayingWalkingSound = false; 
+    private bool isPlayingWalkingSound = false;
 
     private bool isFacingRight = true;
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
                 walkingSoundTimer = 0.0f;
             }
         }
-         else if (isPlayingWalkingSound && walkingSoundTimer >= 0.4f) // Player has stopped moving
+        else if (isPlayingWalkingSound && walkingSoundTimer >= 0.4f) // Player has stopped moving
         {
             walkingAudioSource.Stop();  // Stop walking sound only after minimum time has elapsed
             isPlayingWalkingSound = false;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             walkingSoundTimer += Time.deltaTime;  // Update the timer if we are playing the sound
         }
-        
+
 
         animator.SetFloat("Speed", rigidbody.velocity.magnitude);
         rigidbody.velocity = moveInput * speed;

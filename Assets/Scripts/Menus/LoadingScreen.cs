@@ -1,23 +1,22 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
 {
-    public Slider loadingBar; // Assign this in the inspector
-    public float loadingTime = 3.0f; // Adjust as needed
+    public GameObject loadingImage;
+    public float loadingTime = 2.5f; // Adjust as needed
     public Transform playerTransform; // Reference to the player's transform
 
     private Vector3 originalPlayerPosition; // Store the original player position before loading
     private PauseMenu pauseMenu; // Reference to the PauseMenu script
-    private bool inputEnabled = true; // Flag to control if input should be processed
+    private bool inputEnabled; // Flag to control if input should be processed
+    private bool isLoading = false; // Flag to check if loading is currently active
 
     private void Start()
     {
-        // Get reference to the player's transform
+        // Check if the player transform is assigned
         if (playerTransform == null)
         {
-            Debug.LogError("Player Transform is not assigned!");
             return;
         }
 
@@ -27,75 +26,58 @@ public class LoadingScreen : MonoBehaviour
         // Find the PauseMenu script in the scene
         pauseMenu = FindObjectOfType<PauseMenu>();
 
-        // Start the loading process
-        StartLoading();
+        // Start the loading process only if it's not already loading
+        if (!isLoading)
+        {
+            StartLoading();
+        }
     }
 
     private void StartLoading()
     {
+        isLoading = true; // Set the loading flag
         StartCoroutine(LoadSceneAsync());
     }
 
     IEnumerator LoadSceneAsync()
     {
-        // Disable input
         inputEnabled = false;
 
-        // Set PauseMenu availability to false
         if (pauseMenu != null)
         {
             PauseMenu.Available = false;
         }
 
-        // Set the player's position to (0, 0, 0)
         if (playerTransform != null)
         {
             playerTransform.position = Vector3.zero;
         }
 
-        // Reset loading bar
-        loadingBar.value = 0;
-
-        // Start loading timer
+        // Simulate loading process
         float timer = 0;
         while (timer < loadingTime)
         {
             timer += Time.deltaTime;
-            loadingBar.value = Mathf.Clamp01(timer / loadingTime);
             yield return null;
         }
 
-        // Restore the original player position
         if (playerTransform != null)
         {
             playerTransform.position = originalPlayerPosition;
         }
 
-        // Enable input
         inputEnabled = true;
+        isLoading = false; // Reset the loading flag
 
-        // Set PauseMenu availability to true
         if (pauseMenu != null)
         {
             PauseMenu.Available = true;
         }
 
-        // Deactivate the loading screen GameObject
-        gameObject.SetActive(false);
+        loadingImage.SetActive(false); // Deactivate the loading screen GameObject
     }
 
     void Update()
     {
-        if (inputEnabled && Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (PauseMenu.isPaused)
-            {
-                pauseMenu.ResumeGame();
-            }
-            else
-            {
-                pauseMenu.PauseGame();
-            }
-        }
     }
 }

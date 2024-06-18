@@ -32,9 +32,11 @@ public class Chest : MonoBehaviour
         }
 
         int totalRooms = roomController.GetTotalRoomCount();
+        Debug.LogError(totalRooms);
+        Debug.LogError(roomController.roomCleared);
 
         // Check if the pity system should trigger
-        if (roomController.roomCleared >= totalRooms - 3 && roomController.isKeySpawned == false)
+        if (roomController.roomCleared >= totalRooms - 4 && roomController.isKeySpawned == false)
         {
             SpawnKey();
             roomController.isKeySpawned = true;
