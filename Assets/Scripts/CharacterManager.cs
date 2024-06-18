@@ -71,6 +71,13 @@ public class CharacterManager : MonoBehaviour
     }
     public void PlayGame()
     {
+        StartCoroutine(DelayedSceneLoad());
+    }
+
+    IEnumerator DelayedSceneLoad()
+    {
+        yield return new WaitForSeconds(0.7f);  // Delay before changing the scene
+
         if (GameController.firstTime)
         {
             // Set firstTime to false after the first run

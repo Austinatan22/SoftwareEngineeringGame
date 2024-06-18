@@ -1,24 +1,31 @@
 using UnityEngine;
+using System.Collections; // Needed for IEnumerator
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("CharacterSelection");
+        StartCoroutine(DelayedLoad("CharacterSelection", 0.6f)); // Start the coroutine with a 1 second delay
     }
 
-    public void Hidden()
+    IEnumerator DelayedLoad(string sceneName, float delay)
     {
-        // Load the LoadingScreenHidden scene
-        SceneManager.LoadScene("LoadingScreenHidden");
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+        SceneManager.LoadScene(sceneName); // Load the scene after the delay
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        StartCoroutine(DelayedQuit(0.6f)); // Start the coroutine with a 1 second delay
+    }
+
+    IEnumerator DelayedQuit(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for 1 second
+        Application.Quit(); // Quit the application
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false; // Stop playing in the Unity Editor
 #endif
     }
 }
