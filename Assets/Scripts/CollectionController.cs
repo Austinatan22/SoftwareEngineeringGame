@@ -16,12 +16,26 @@ public class CollectionController : MonoBehaviour
     public float attackSpeedChange;
     public float bulletSizeChange;
     public int cost;
+    public AudioClip pickupSound; // Sound effect for picking up the item
+
     private bool playerInRange = false;
+    private AudioSource audioSource; // AudioSource component
+
     public static bool isKeyAcquired = false;
 
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = item.itemImage;
+
+        // Ensure there is an AudioSource component and assign it
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Setup the AudioSource properties
+        audioSource.clip = pickupSound;
+        audioSource.playOnAwake = false;
 
         PolygonCollider2D polygonCollider = GetComponent<PolygonCollider2D>();
         if (polygonCollider != null)
@@ -60,11 +74,13 @@ public class CollectionController : MonoBehaviour
             else if (gameObject.tag == "Key")
             {
                 isKeyAcquired = true;
+                PlaySoundEffect();
                 Destroy(gameObject);
             }
             else if (gameObject.tag == "Coin")
             {
                 CurrencyManager.instance.AddCurrency(1);
+                PlaySoundEffect();
                 Destroy(gameObject);
             }
         }
@@ -78,6 +94,7 @@ public class CollectionController : MonoBehaviour
         GameController.FireRateChange(attackSpeedChange);
         GameController.BulletSizeChange(bulletSizeChange);
         GameController.instance.UpdateCollectedItems(this);
+        PlaySoundEffect();
         Destroy(gameObject);
     }
 
@@ -91,6 +108,14 @@ public class CollectionController : MonoBehaviour
         else
         {
             Debug.Log("Not enough currency.");
+        }
+    }
+
+    private void PlaySoundEffect()
+    {
+        if (audioSource && pickupSound)
+        {
+            audioSource.Play();
         }
     }
 }

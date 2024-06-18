@@ -78,5 +78,12 @@ public class BulletController : MonoBehaviour
             GameController.DamagePlayer(1);
             Destroy(gameObject);
         }
+
+        if (col.gameObject.name.Contains("Wall") || col.gameObject.name.Contains("Door"))
+        {
+            Destroy(gameObject); // Destroy the bullet
+        }
     }
+
+    
 }

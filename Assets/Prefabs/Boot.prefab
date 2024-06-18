@@ -107,6 +107,7 @@ MonoBehaviour:
   attackSpeedChange: 0
   bulletSizeChange: 0
   cost: 0
+  pickupSound: {fileID: 8300000, guid: 6c67bc0d4b8fdd941900133f4e6c2ef0, type: 3}
 --- !u!58 &8026200029467548909
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4782007233362905191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

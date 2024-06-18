@@ -107,6 +107,7 @@ MonoBehaviour:
   attackSpeedChange: 0
   bulletSizeChange: 0
   cost: 0
+  pickupSound: {fileID: 8300000, guid: 6c67bc0d4b8fdd941900133f4e6c2ef0, type: 3}
 --- !u!58 &-4240288258604249322
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -107,6 +107,7 @@ MonoBehaviour:
   attackSpeedChange: 0.25
   bulletSizeChange: 0.25
   cost: 7
+  pickupSound: {fileID: 8300000, guid: 6c67bc0d4b8fdd941900133f4e6c2ef0, type: 3}
 --- !u!114 &949176008038831649
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,10 +13,12 @@ public class BossController : MonoBehaviour
     private Vector3 moveDirection = new Vector3(1, 1, 0); // Initial diagonal movement
     private BossState currState = BossState.Idle;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer; // Reference to the sprite renderer
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
     }
 
     private void Update()
@@ -28,6 +30,7 @@ public class BossController : MonoBehaviour
                 break;
             case BossState.Attack:
                 MoveDiagonally();
+                FlipSprite();
                 break;
             case BossState.Die:
                 // Handle death state, possibly do nothing
@@ -55,9 +58,18 @@ public class BossController : MonoBehaviour
         rb.velocity = moveDirection.normalized * moveSpeed;
     }
 
+    private void FlipSprite()
+    {
+        // Flip the sprite vertically when moving left
+        if (moveDirection.x < 0)
+            spriteRenderer.flipY = true;
+        else
+            spriteRenderer.flipY = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Door"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.name.Contains("Wall"))
         {
             // Reflect the move direction based on the collision normal
             moveDirection = Vector3.Reflect(moveDirection, collision.contacts[0].normal);
