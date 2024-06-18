@@ -36,7 +36,7 @@ public class RoomController : MonoBehaviour
     public int roomCleared;
     private bool itemSpawned;
     private Chest chest;
-    public bool isKeySpawned = false;
+    public bool isKeySpawned;
     void Awake()
     {
         instance = this; // Set the singleton instance
@@ -54,7 +54,6 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
-        Debug.LogError(isKeySpawned);
         UpdateRoomQueue(); // Call UpdateRoomQueue every frame
     }
 
@@ -276,10 +275,23 @@ public class RoomController : MonoBehaviour
                         }
                     }
                 }
+                else if (currRoom.name.Contains("End"))
+                {
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
+                    {
+                        door.spriteHandler.SetActive(false);
+                        door.bossDoor.SetActive(true);
+                        var spriteHandler = door.GetComponentInChildren<Animator>();
+                        if (spriteHandler != null)
+                        {
+                            spriteHandler.SetBool("isOpen", true);
+                        }
+                        door.doorCollider.SetActive(true); // Activate door colliders in the current room
+                    }
+                }
                 else
                 {
                     roomCleared++;
-                    Debug.LogError("Cleared: " + roomCleared);
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         if (door.tag == "Chest")

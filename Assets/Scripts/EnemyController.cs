@@ -19,6 +19,8 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] Transform target;
+    NavMeshAgent agent;
     GameObject player;
     public EnemyState currState = EnemyState.Idle;
     public EnemyType enemyType;
@@ -39,32 +41,40 @@ public class EnemyController : MonoBehaviour
     public GameObject coinPrefab; // Assign the coin prefab in the inspector
     private System.Random randnum = new System.Random();
 
-    [SerializeField] Transform target;
     void Start()
     {
-        NavMeshAgent agent;
-
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         player = GameObject.FindGameObjectWithTag("Player");
         originalSpeed = speed; // Initialize the original speed
     }
-
     void Update()
     {
+        if (Health <= 0) return; // Early exit if the enemy is dead
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         switch (currState)
         {
-            case (EnemyState.Wander):
-                Wander();
+            case EnemyState.Idle:
+                if (distanceToPlayer <= range)
+                    currState = EnemyState.Follow;
                 break;
-            case (EnemyState.Follow):
+            case EnemyState.Follow:
                 Follow();
+                if (distanceToPlayer <= attackRange)
+                    currState = EnemyState.Attack;
+                else if (distanceToPlayer > range)
+                    currState = EnemyState.Wander;
                 break;
-            case (EnemyState.Die):
-                break;
-            case (EnemyState.Attack):
+            case EnemyState.Attack:
                 Attack();
+                if (distanceToPlayer > attackRange)
+                    currState = EnemyState.Follow;
+                break;
+            case EnemyState.Wander:
+                Wander();
+                if (distanceToPlayer <= range)
+                    currState = EnemyState.Follow;
                 break;
         }
 
@@ -92,7 +102,8 @@ public class EnemyController : MonoBehaviour
 
     private bool IsPlayerInRange(float range)
     {
-        return Vector3.Distance(transform.position, player.transform.position) <= range;
+        float sqrRange = range * range;  // Square the range for comparison
+        return (transform.position - player.transform.position).sqrMagnitude <= sqrRange;
     }
 
     private IEnumerator ChooseDirection()
@@ -122,7 +133,8 @@ public class EnemyController : MonoBehaviour
 
     void Follow()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if (player != null)
+            agent.SetDestination(player.transform.position);
     }
 
     void Attack()
@@ -186,5 +198,4 @@ public class EnemyController : MonoBehaviour
             speed = 0;
         }
     }
-
 }
