@@ -48,6 +48,7 @@ public class GameOverManager : MonoBehaviour
         Time.timeScale = 1; // Resume the game time
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the current scene
 
+        GameController.ResetPlayer(); 
         // Set PauseMenu availability to true
         if (pauseMenu != null)
         {
@@ -57,6 +58,8 @@ public class GameOverManager : MonoBehaviour
 
     void QuitGame()
     {
+        GameController.ResetPlayer(); 
+        
         Time.timeScale = 1; // Resume the game time
         SceneManager.LoadScene("MainMenu"); // Change "MainMenu" to your main menu scene name
         GameController.firstTime = true;

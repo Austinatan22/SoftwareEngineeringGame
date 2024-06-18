@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
-    private static float health = 2;
+    private static float health = 4;
     private static int maxHealth = 6;
     private static float moveSpeed = 5f;
     private static float fireRate = 0.5f;
@@ -127,5 +127,11 @@ public class GameController : MonoBehaviour
         {
             Debug.LogWarning("GameOverManager is not set or not found!");
         }
+    }
+
+    public static void ResetPlayer()
+    {
+        health = maxHealth;
+        Debug.Log("Player health reset to max health: " + maxHealth);
     }
 }
