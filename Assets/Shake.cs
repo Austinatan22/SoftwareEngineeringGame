@@ -1,33 +1,45 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Shake : MonoBehaviour
+public class ScreenShake : MonoBehaviour
 {
-    public static bool shake = false;
-    public AnimationCurve curve;
-    public float duration = 1f;
-    void Update()
+    // Transform of the camera to shake
+    public Transform camTransform;
+
+    // How long the object should shake for
+    public float shakeDuration = 0f;
+
+    // Amplitude of the shake. A smaller value shakes the camera more subtly
+    public float shakeAmount = 0.2f; // Reduced for a more subtle effect
+    public float decreaseFactor = 1.5f; // Increase the decrease factor for quicker calm down
+
+    Vector3 originalPos;
+
+    void Awake()
     {
-        if (shake)
+        if (camTransform == null)
         {
-            shake = false;
-            StartCoroutine(Shaking());
+            camTransform = GetComponent<Transform>();
         }
     }
-    IEnumerator Shaking()
+
+    void OnEnable()
     {
-        Vector3 startPosition = transform.position;
-        float elapsedTime = 0f;
+        originalPos = camTransform.localPosition;
+    }
 
-        while (elapsedTime < duration)
+    void Update()
+    {
+        if (shakeDuration > 0)
         {
-            elapsedTime += Time.deltaTime;
-            float strength = curve.Evaluate(elapsedTime / duration);
-            transform.position = startPosition + Random.insideUnitSphere * strength;
-            yield return null;
-        }
+            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
-        transform.position = startPosition;
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shakeDuration = 0f;
+            camTransform.localPosition = originalPos;
+        }
     }
 }

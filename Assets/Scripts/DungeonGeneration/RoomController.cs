@@ -36,7 +36,7 @@ public class RoomController : MonoBehaviour
     public int roomCleared;
     private bool itemSpawned;
     private Chest chest;
-    public bool isKeySpawned = false;
+    public bool isKeySpawned;
     void Awake()
     {
         instance = this; // Set the singleton instance
@@ -54,7 +54,6 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
-        Debug.LogError(isKeySpawned);
         UpdateRoomQueue(); // Call UpdateRoomQueue every frame
     }
 
@@ -97,27 +96,12 @@ public class RoomController : MonoBehaviour
 
         if (loadRoomQueue.Count == 0)
         {
-            if (GameController.LevelValue() < 5)
-            {
-                Debug.Log("not level 5 yet");
-                Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
-                Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
-                Destroy(bossRoom.gameObject); // Destroy the original boss room
-                var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
-                loadedRooms.Remove(roomToRemove);
-                LoadRoom("Semi", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
-            }
-            if (GameController.LevelValue() == 5)
-            {
-                Debug.Log("already lvl 5");
-                Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
-                Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
-                Destroy(bossRoom.gameObject); // Destroy the original boss room
-                var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
-                loadedRooms.Remove(roomToRemove);
-                LoadRoom("End", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
-            }
-
+            Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
+            Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
+            Destroy(bossRoom.gameObject); // Destroy the original boss room
+            var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
+            loadedRooms.Remove(roomToRemove);
+            LoadRoom("End", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
         }
     }
 
@@ -291,10 +275,23 @@ public class RoomController : MonoBehaviour
                         }
                     }
                 }
+                else if (currRoom.name.Contains("End"))
+                {
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
+                    {
+                        door.spriteHandler.SetActive(false);
+                        door.bossDoor.SetActive(true);
+                        var spriteHandler = door.GetComponentInChildren<Animator>();
+                        if (spriteHandler != null)
+                        {
+                            spriteHandler.SetBool("isOpen", true);
+                        }
+                        door.doorCollider.SetActive(true); // Activate door colliders in the current room
+                    }
+                }
                 else
                 {
                     roomCleared++;
-                    Debug.LogError("Cleared: " + roomCleared);
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         if (door.tag == "Chest")
@@ -322,7 +319,7 @@ public class RoomController : MonoBehaviour
     {
         foreach (Room room in loadedRooms)
         {
-            if (room.name.Contains("End") || room.name.Contains("Semi"))
+            if (room.name.Contains("End"))
             {
                 room.bossDoors(); // Call bossDoors function for the end room
             }

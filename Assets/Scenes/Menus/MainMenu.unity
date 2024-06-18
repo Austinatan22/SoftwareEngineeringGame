@@ -878,6 +878,8 @@ MonoBehaviour:
   audioSource: {fileID: 1608492760}
   hoverSound: {fileID: 8300000, guid: d938e677165912f4cb259b8ef9051279, type: 3}
   clickSound: {fileID: 8300000, guid: 7e930783eaa3a2f44862e0a2e301039b, type: 3}
+  normalSize: {x: 1, y: 1, z: 1}
+  hoveredSize: {x: 1.1, y: 1.1, z: 1.1}
 --- !u!82 &1608492760
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1219,6 +1221,8 @@ MonoBehaviour:
   audioSource: {fileID: 1608492760}
   hoverSound: {fileID: 8300000, guid: d938e677165912f4cb259b8ef9051279, type: 3}
   clickSound: {fileID: 8300000, guid: 7e930783eaa3a2f44862e0a2e301039b, type: 3}
+  normalSize: {x: 1, y: 1, z: 1}
+  hoveredSize: {x: 1.1, y: 1.1, z: 1.1}
 --- !u!1 &1752546505
 GameObject:
   m_ObjectHideFlags: 0

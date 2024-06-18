@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverPanel; // Drag the panel to this field in the inspector
-
     public Button retryButton; // Drag the retry button here
     public Button quitButton; // Drag the quit button here
     private PauseMenu pauseMenu; // Reference to the PauseMenu script
@@ -18,6 +17,7 @@ public class GameOverManager : MonoBehaviour
         // Add listeners to buttons
         retryButton.onClick.AddListener(RetryGame);
         quitButton.onClick.AddListener(QuitGame);
+
         // Find the PauseMenu script in the scene
         pauseMenu = FindObjectOfType<PauseMenu>();
 
@@ -47,8 +47,7 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 1; // Resume the game time
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the current scene
-        GameController.ResetPlayer();
-        GameController.ResetLevelCount();
+
         // Set PauseMenu availability to true
         if (pauseMenu != null)
         {

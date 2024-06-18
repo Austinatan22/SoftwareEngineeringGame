@@ -71,14 +71,11 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        if (name.Contains("End") || name.Contains("Semi"))
+        if (name.Contains("End") && !updatedDoors)
         {
-            if (!updatedDoors)
-            {
-                RemoveUnconnectedDoors();
-                updatedDoors = true;
-                bossDoors();
-            }
+            RemoveUnconnectedDoors();
+            updatedDoors = true;
+            bossDoors();
         }
     }
 
@@ -175,7 +172,7 @@ public class Room : MonoBehaviour
     {
         List<Room> adjacentRooms = new List<Room>();
 
-        if (name.Contains("End") || name.Contains("Semi"))
+        if (name.Contains("End"))
         {
             Room rightRoom = GetRight();
             if (rightRoom != null) adjacentRooms.Add(rightRoom);

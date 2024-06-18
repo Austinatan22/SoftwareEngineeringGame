@@ -27,9 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/HiddenOwenSunshine.unity
     guid: 43abf65cbe3273f429c8f24b76fda0c2
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/BasementSemi.unity
-    guid: 0705d38bbbe38ab4a8279d98c3e686b2
-  - enabled: 1
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 05e65126a7483bf45bb1d3224494e195
   - enabled: 1

@@ -7,15 +7,17 @@ public class BossController : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float attackSpeed = 8f;
-
     public float health;
-    public float detectionRange = 15f;
+    public float detectionRange = 17f;
     public Transform player;
     private Vector2 moveDirection = new Vector2(1, 1); // Initial diagonal movement
-    private BossState currState = BossState.Idle;
+    private BossState currState = BossState.Moving;
     private Rigidbody2D rb;
     private Vector2 lastPlayerPosition;
     private float attackTimer = 10f;
+    public float attackCooldown = 5f;
+    private float lastAttackTime = -10f;
+
 
     private void Start()
     {
@@ -23,19 +25,24 @@ public class BossController : MonoBehaviour
         StartCoroutine(TrackPlayerPosition());
     }
 
-    private void Update()
+    void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
+        Debug.Log($"Current State: {currState}, Distance: {distance}");
 
-        if (distance > detectionRange)
+        switch (currState)
         {
-            currState = BossState.Idle;
-            rb.velocity = Vector2.zero;
-        }
-        else if (distance <= detectionRange && currState != BossState.Attack)
-        {
-            currState = BossState.Moving;
-            MoveDiagonally();
+            case BossState.Moving:
+                MoveDiagonally();
+                break;
+
+            case BossState.Attack:
+                if (distance > detectionRange || Time.time >= lastAttackTime + attackCooldown)
+                {
+                    currState = distance <= detectionRange ? BossState.Moving : BossState.Idle;
+                    rb.velocity = currState == BossState.Moving ? moveDirection.normalized * moveSpeed : Vector2.zero;
+                }
+                break;
         }
     }
 
@@ -51,7 +58,6 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(attackTimer);
             if (currState == BossState.Moving)
             {
-                // Record last position and initiate attack
                 lastPlayerPosition = player.position;
                 StartCoroutine(MoveToPlayerPosition());
             }
@@ -71,10 +77,9 @@ public class BossController : MonoBehaviour
             yield return null;
         }
 
-        // Ensure the boss reaches the exact spot (if needed, to handle floating-point imprecision)
         transform.position = lastPlayerPosition;
-        currState = BossState.Moving; // Return to moving state
-        MoveDiagonally(); // Continue moving diagonally
+        currState = BossState.Moving;
+        MoveDiagonally();
     }
 
     public void TakeDamage(int damage)
@@ -86,41 +91,19 @@ public class BossController : MonoBehaviour
         }
     }
 
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if ((collision.gameObject.CompareTag("Wall") || collision.gameObject.name.Contains("Wall")) && currState == BossState.Moving)
-    //     {
-    //         // Reflect the movement direction based on the collision normal
-    //         ContactPoint2D contact = collision.contacts[0]; // Get the first contact point
-    //         moveDirection = Vector2.Reflect(moveDirection, contact.normal);
-    //         rb.velocity = moveDirection.normalized * moveSpeed;
-    //     }
-    // }
     private void OnCollisionEnter2D(Collision2D collider)
     {
-        // Check for collision with walls to reflect the movement direction, only when in Moving state
-        if ((collider.gameObject.CompareTag("Wall") || collider.gameObject.name.Contains("Wall")) && currState == BossState.Moving)
+        if ((collider.gameObject.CompareTag("Wall") || collider.gameObject.name.Contains("Wall")) && (currState == BossState.Moving || currState == BossState.Attack))
         {
-            // This needs a different handling since OnTrigger doesn't have contact points for normal calculation
-            // For now, let's just invert the direction or handle it in another way suited to your game design
-            // moveDirection = -moveDirection;
-            // rb.velocity = moveDirection.normalized * moveSpeed;
-            ContactPoint2D contact = collider.contacts[0]; // Get the first contact point
+            ContactPoint2D contact = collider.contacts[0];
             moveDirection = Vector2.Reflect(moveDirection, contact.normal);
             rb.velocity = moveDirection.normalized * moveSpeed;
         }
 
-        // Check for collision with player
         if (collider.gameObject.CompareTag("Player"))
         {
-            GameController.DamagePlayer(1);  // Call damage function
-
-            // Ensure shark continues moving in its current direction after 'hitting' the player
-            if (currState == BossState.Attack || currState == BossState.Moving)
-            {
-                rb.velocity = moveDirection.normalized * moveSpeed;  // Continue moving in the original direction
-            }
+            GameController.DamagePlayer(1);
+            rb.velocity = moveDirection.normalized * moveSpeed;
         }
     }
-
 }
