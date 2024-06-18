@@ -263,3 +263,11 @@ Received Import Request.
 Start importing Assets/Prefabs/Enemy.prefab using Guid(05235872f7cdabd428251a6387b50d25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88a8d05271e06e7b81f2bd76cc922484') in 0.098846 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 108
+========================================================================
+Received Import Request.
+  Time since last request: 157.118239 seconds.
+  path: Assets/Prefabs/Crate.prefab
+  artifactKey: Guid(8517be572c55582448ad8860b97ebfb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Crate.prefab using Guid(8517be572c55582448ad8860b97ebfb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '756c02ff780bef10da8ce2f79aaeeb55') in 9.144974 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 17
