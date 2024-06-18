@@ -16,7 +16,7 @@ public class RoomController : MonoBehaviour
 {
     public static RoomController instance; // Singleton instance of RoomController
     private ChestSpawner chestSpawner; // Reference to the ChestSpawner component
-    private List<string> possibleRooms = new List<string>() { "Empty", "Basic1", "Shop" }; // List of possible room types
+    private List<string> possibleRooms = new List<string>() { "Empty", "Basic1", "Shop", "Basic3", "Basic2" }; // List of possible room types
 
     RoomInfo currentLoadRoomData; // Data for the room currently being loaded
     private bool shopRoomSpawned = false; // Tracks if a shop room has been spawned

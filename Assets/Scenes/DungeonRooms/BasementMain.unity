@@ -2600,6 +2600,7 @@ MonoBehaviour:
   shakeDuration: 0
   shakeAmount: 0.7
   decreaseFactor: 1
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1025516055
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1409059704
 MonoBehaviour:
   m_ObjectHideFlags: 0

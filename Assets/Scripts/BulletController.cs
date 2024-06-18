@@ -83,6 +83,13 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject); // Destroy the bullet
         }
+
+        if (col.tag == "Crate" && !isEnemyBullet)
+        {
+            CrateManager crateManager = col.GetComponent<CrateManager>();
+            crateManager.damageCrate();
+            Destroy(gameObject);
+        }
     }
 
     
