@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
     public GameObject keyArea;
     private GameObject player;
     private float widthOffset = 4f;
+    public GameObject spriteHandler;
+    public GameObject bossDoor;
 
 
     private void Start()

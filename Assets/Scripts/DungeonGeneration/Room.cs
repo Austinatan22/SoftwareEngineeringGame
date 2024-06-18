@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NavMeshPlus.Components;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -9,6 +9,11 @@ public class Room : MonoBehaviour
     public int X;
     public int Y;
     private bool updatedDoors = false;
+    public NavMeshSurface navMeshSurface;
+
+    private static HashSet<int> bakedRooms = new HashSet<int>();
+    private static HashSet<int> spawnedRooms = new HashSet<int>();
+    private static Room currentRoom;
 
     public Room(int x, int y)
     {
@@ -20,14 +25,18 @@ public class Room : MonoBehaviour
     public Door rightDoor;
     public Door topDoor;
     public Door bottomDoor;
+    public List<Door> doors = new List<Door>();
+
+    public List<Transform> enemySpawnPoints = new List<Transform>();
     public Door Chest;
 
-    public List<Door> doors = new List<Door>();
+    public GameObject enemyPrefab;
 
     void Start()
     {
         if (RoomController.instance == null)
         {
+            Debug.LogWarning("RoomController instance is null. Exiting Start method.");
             return;
         }
 
@@ -56,6 +65,8 @@ public class Room : MonoBehaviour
         }
 
         RoomController.instance.RegisterRoom(this);
+
+        GetEnemySpawnPoints(); // Ensure spawn points are populated
     }
 
     void Update()
@@ -64,7 +75,28 @@ public class Room : MonoBehaviour
         {
             RemoveUnconnectedDoors();
             updatedDoors = true;
-            bossDoors(); // Call the bossDoors method here
+            bossDoors();
+        }
+    }
+
+    void BakeNavMesh()
+    {
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.BuildNavMesh();
+            Debug.Log("NavMesh baked for room at position: " + X + ", " + Y);
+        }
+        else
+        {
+            Debug.LogWarning("NavMeshSurface is not assigned.");
+        }
+    }
+
+    void ClearNavMesh()
+    {
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.navMeshData = null; // Clear the NavMesh data
         }
     }
 
@@ -178,6 +210,11 @@ public class Room : MonoBehaviour
                             {
                                 door.keyArea.SetActive(true); // Activate the keyArea
                             }
+                            if (door.bossDoor != null)
+                            {
+                                door.bossDoor.SetActive(true);
+                                door.spriteHandler.SetActive(false);
+                            }
                         }
                         break;
                     case Door.DoorType.left:
@@ -188,6 +225,11 @@ public class Room : MonoBehaviour
                             if (door.keyArea != null)
                             {
                                 door.keyArea.SetActive(true); // Activate the keyArea
+                            }
+                            if (door.bossDoor != null)
+                            {
+                                door.bossDoor.SetActive(true);
+                                door.spriteHandler.SetActive(false);
                             }
                         }
                         break;
@@ -200,6 +242,11 @@ public class Room : MonoBehaviour
                             {
                                 door.keyArea.SetActive(true); // Activate the keyArea
                             }
+                            if (door.bossDoor != null)
+                            {
+                                door.bossDoor.SetActive(true);
+                                door.spriteHandler.SetActive(false);
+                            }
                         }
                         break;
                     case Door.DoorType.bottom:
@@ -211,6 +258,11 @@ public class Room : MonoBehaviour
                             {
                                 door.keyArea.SetActive(true); // Activate the keyArea
                             }
+                            if (door.bossDoor != null)
+                            {
+                                door.bossDoor.SetActive(true);
+                                door.spriteHandler.SetActive(false);
+                            }
                         }
                         break;
                     case Door.DoorType.chest:
@@ -219,20 +271,102 @@ public class Room : MonoBehaviour
             }
         }
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));
     }
+
     public Vector3 GetRoomCentre()
     {
         return new Vector3(X * Width, Y * Height);
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             RoomController.instance.OnPlayerEnterRoom(this);
+
+            int roomHash = GetRoomHash();
+            if (navMeshSurface != null && !bakedRooms.Contains(roomHash))
+            {
+                BakeNavMesh();
+                bakedRooms.Add(roomHash);
+            }
+
+            if (!spawnedRooms.Contains(roomHash))
+            {
+                SpawnEnemies();
+                spawnedRooms.Add(roomHash);
+            }
+            else
+            {
+                Debug.Log("Enemies already spawned in this room: " + name);
+            }
+
+            // if (currentRoom != null && currentRoom != this)
+            // {
+            //     currentRoom.ClearNavMesh(); // Clear NavMesh of the previous room
+            // }
+
+            currentRoom = this; // Set this room as the current room
         }
+    }
+
+    // void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         ClearNavMesh(); // Clear NavMesh when the player exits the room
+    //     }
+    // }
+
+    void GetEnemySpawnPoints()
+    {
+        enemySpawnPoints.Clear(); // Clear previous data to avoid duplication
+        Transform[] spawnPoints = GetComponentsInChildren<Transform>();
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.CompareTag("EnemySpawnPoint"))
+            {
+                enemySpawnPoints.Add(spawnPoint);
+            }
+        }
+        if (enemySpawnPoints.Count == 0)
+        {
+            Debug.LogWarning("No enemy spawn points found in room: " + name);
+        }
+    }
+
+    public void SpawnEnemies()
+    {
+        if (enemyPrefab == null)
+        {
+            Debug.LogWarning("Enemy prefab is not assigned.");
+            return;
+        }
+
+        if (enemySpawnPoints.Count == 0)
+        {
+            Debug.LogWarning("No enemy spawn points found in room: " + name);
+            return;
+        }
+
+        foreach (Transform spawnPoint in enemySpawnPoints)
+        {
+            Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+            Debug.Log("Spawned enemy at position: " + spawnPoint.position);
+        }
+    }
+
+    int GetRoomHash()
+    {
+        // Using a combination that spreads out values more distinctly
+        int hash = 17;
+        hash = hash * 23 + X.GetHashCode();
+        hash = hash * 23 + Y.GetHashCode();
+        return hash;
     }
 }

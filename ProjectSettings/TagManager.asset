@@ -15,6 +15,7 @@ TagManager:
   - Key
   - Boss
   - Chest
+  - EnemySpawnPoint
   layers:
   - Default
   - TransparentFX

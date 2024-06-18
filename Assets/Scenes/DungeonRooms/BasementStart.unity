@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -302,6 +302,7 @@ MonoBehaviour:
   doorType: 2
   doorCollider: {fileID: 488638184}
   keyArea: {fileID: 2066812344}
+  spriteHandler: {fileID: 1676650148}
 --- !u!1 &303745873
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,8 +718,7 @@ Animator:
   m_GameObject: {fileID: 559324813}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -968489160441738250, guid: c3fafad3dc1c9c54cacb5cd8c4334811,
-    type: 3}
+  m_Controller: {fileID: 9100000, guid: d9827b1728f9b4c40928151dde965352, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -907,6 +907,7 @@ MonoBehaviour:
   doorType: 1
   doorCollider: {fileID: 98664080}
   keyArea: {fileID: 991889514}
+  spriteHandler: {fileID: 2130716218}
 --- !u!1 &1219526665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,8 +1751,7 @@ Animator:
   m_GameObject: {fileID: 1564258023}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -968489160441738250, guid: c3fafad3dc1c9c54cacb5cd8c4334811,
-    type: 3}
+  m_Controller: {fileID: 9100000, guid: d9827b1728f9b4c40928151dde965352, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1937,6 +1937,7 @@ MonoBehaviour:
   doorType: 3
   doorCollider: {fileID: 419764005}
   keyArea: {fileID: 1615890026}
+  spriteHandler: {fileID: 559324813}
 --- !u!1 &1615890026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,6 +2063,7 @@ MonoBehaviour:
   doorType: 0
   doorCollider: {fileID: 1934994569}
   keyArea: {fileID: 494517821}
+  spriteHandler: {fileID: 1564258023}
 --- !u!1 &1676650148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,8 +2107,7 @@ Animator:
   m_GameObject: {fileID: 1676650148}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -968489160441738250, guid: c3fafad3dc1c9c54cacb5cd8c4334811,
-    type: 3}
+  m_Controller: {fileID: 9100000, guid: d9827b1728f9b4c40928151dde965352, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2597,8 +2598,7 @@ Animator:
   m_GameObject: {fileID: 2130716218}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -968489160441738250, guid: c3fafad3dc1c9c54cacb5cd8c4334811,
-    type: 3}
+  m_Controller: {fileID: 9100000, guid: d9827b1728f9b4c40928151dde965352, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -256,6 +256,22 @@ public class RoomController : MonoBehaviour
                     {
                         if (door.tag != "bossDoor" && door.tag != "Chest")
                         {
+                            var spriteHandler = door.GetComponentInChildren<Animator>();
+                            if (spriteHandler != null)
+                            {
+                                spriteHandler.SetBool("isOpen", true);
+                            }
+                            door.doorCollider.SetActive(true); // Activate door colliders in the current room
+                        }
+                        else if (door.tag == "bossDoor")
+                        {
+                            door.spriteHandler.SetActive(false);
+                            door.bossDoor.SetActive(true);
+                            var spriteHandler = door.GetComponentInChildren<Animator>();
+                            if (spriteHandler != null)
+                            {
+                                spriteHandler.SetBool("isOpen", true);
+                            }
                             door.doorCollider.SetActive(true); // Activate door colliders in the current room
                         }
                     }
@@ -273,6 +289,11 @@ public class RoomController : MonoBehaviour
                         }
                         else if (door.tag != "bossDoor")
                         {
+                            var spriteHandler = door.GetComponentInChildren<Animator>();
+                            if (spriteHandler != null)
+                            {
+                                spriteHandler.SetBool("isOpen", false);
+                            }
                             door.doorCollider.SetActive(false); // Deactivate door colliders in rooms without enemies
                         }
                     }

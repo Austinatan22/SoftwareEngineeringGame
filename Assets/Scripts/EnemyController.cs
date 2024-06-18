@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public enum EnemyState
 {
     Idle,
@@ -39,9 +39,14 @@ public class EnemyController : MonoBehaviour
     public GameObject coinPrefab; // Assign the coin prefab in the inspector
     private System.Random randnum = new System.Random();
 
-
+    [SerializeField] Transform target;
     void Start()
     {
+        NavMeshAgent agent;
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
         player = GameObject.FindGameObjectWithTag("Player");
         originalSpeed = speed; // Initialize the original speed
     }
