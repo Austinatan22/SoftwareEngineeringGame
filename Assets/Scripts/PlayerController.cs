@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
             Load();
         }
         UpdateCharacter(selectedOption);
-        walkingAudioSource.volume = 0.2f;
     }
 
     void Update()
@@ -154,7 +153,8 @@ public class PlayerController : MonoBehaviour
         // Trigger the shooting animation
         gun.GetComponent<Animator>().SetTrigger("Shoot");
 
-        audioSource.PlayOneShot(shootSound);
+        audioSource.PlayOneShot(shootSound, 0.2f);
+
     }
 
 
