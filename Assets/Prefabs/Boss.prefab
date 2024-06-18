@@ -104,9 +104,6 @@ MonoBehaviour:
   attackRange: 10
   player: {fileID: 4725445783789383760, guid: 599cc7ae311d4a949beb67a60dc38dbe, type: 3}
   health: 100
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &4983346652286215485
 Rigidbody2D:
   serializedVersion: 4

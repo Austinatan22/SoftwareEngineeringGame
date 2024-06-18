@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
     public float gunDistanceFromPlayer = 1.0f;  // Distance of the gun from the player
 
     public Animator animator;
+    public AudioSource audioSource;  // Reference to the AudioSource component for shooting
+    public AudioClip shootSound;
+
+    public AudioSource walkingAudioSource;  // Separate AudioSource for walking sound
+    public AudioClip walkingSound;
+    private float walkingSoundTimer = 0.0f;  // Timer to track walking sound minimum play time
+    private bool isPlayingWalkingSound = false; 
 
     private bool isFacingRight = true;
 
@@ -28,6 +35,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        walkingAudioSource.loop = true;  // Set the walking sound to loop
+        walkingAudioSource.clip = walkingSound;
+
         if (PlayerPrefs.HasKey("selectedOption"))
         {
             selectedOption = 0;
@@ -37,6 +47,7 @@ public class PlayerController : MonoBehaviour
             Load();
         }
         UpdateCharacter(selectedOption);
+        walkingAudioSource.volume = 0.2f;
     }
 
     void Update()
@@ -58,13 +69,25 @@ public class PlayerController : MonoBehaviour
             lastMovementDirection = moveInput; // Update the last movement direction when moving
             animator.SetFloat("Horizontal", horizontal);
             animator.SetFloat("Vertical", vertical);
+
+            if (!isPlayingWalkingSound)
+            {
+                walkingAudioSource.Play();
+                isPlayingWalkingSound = true;
+                walkingSoundTimer = 0.0f;
+            }
         }
-        else
+         else if (isPlayingWalkingSound && walkingSoundTimer >= 0.4f) // Player has stopped moving
         {
-            // Keep the last direction in the animator when stopping
-            animator.SetFloat("Horizontal", lastMovementDirection.x);
-            animator.SetFloat("Vertical", lastMovementDirection.y);
+            walkingAudioSource.Stop();  // Stop walking sound only after minimum time has elapsed
+            isPlayingWalkingSound = false;
         }
+
+        if (isPlayingWalkingSound)
+        {
+            walkingSoundTimer += Time.deltaTime;  // Update the timer if we are playing the sound
+        }
+        
 
         animator.SetFloat("Speed", rigidbody.velocity.magnitude);
         rigidbody.velocity = moveInput * speed;
@@ -130,6 +153,8 @@ public class PlayerController : MonoBehaviour
 
         // Trigger the shooting animation
         gun.GetComponent<Animator>().SetTrigger("Shoot");
+
+        audioSource.PlayOneShot(shootSound);
     }
 
 
