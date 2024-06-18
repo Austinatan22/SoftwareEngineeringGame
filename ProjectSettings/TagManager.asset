@@ -17,7 +17,6 @@ TagManager:
   - Chest
   - EnemySpawnPoint
   - Area
-  - Crate
   layers:
   - Default
   - TransparentFX
