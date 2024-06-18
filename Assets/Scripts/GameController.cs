@@ -128,4 +128,19 @@ public class GameController : MonoBehaviour
             Debug.LogWarning("GameOverManager is not set or not found!");
         }
     }
+    public static void ResetPlayer()
+    {
+        health = maxHealth;
+        Debug.Log("Player health reset to max health: " + maxHealth);
+    }
+
+    public static void ResetLevelCount()
+    {
+        levelCount = 1;
+    }
+
+    public static int LevelValue()
+    {
+        return levelCount;
+    }
 }

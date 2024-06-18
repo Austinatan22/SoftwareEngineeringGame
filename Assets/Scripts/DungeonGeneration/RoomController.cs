@@ -36,7 +36,8 @@ public class RoomController : MonoBehaviour
     public int roomCleared;
     private bool itemSpawned;
     private Chest chest;
-    public bool isKeySpawned;
+    public bool isKeySpawned = false;
+    public LevelHandler levelHandler;
     void Awake()
     {
         instance = this; // Set the singleton instance
@@ -54,6 +55,7 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
+        Debug.LogError(isKeySpawned);
         UpdateRoomQueue(); // Call UpdateRoomQueue every frame
     }
 
@@ -96,12 +98,27 @@ public class RoomController : MonoBehaviour
 
         if (loadRoomQueue.Count == 0)
         {
-            Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
-            Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
-            Destroy(bossRoom.gameObject); // Destroy the original boss room
-            var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
-            loadedRooms.Remove(roomToRemove);
-            LoadRoom("End", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
+            if (GameController.LevelValue() < 5)
+            {
+                Debug.Log("not level 5 yet");
+                Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
+                Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
+                Destroy(bossRoom.gameObject); // Destroy the original boss room
+                var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
+                loadedRooms.Remove(roomToRemove);
+                LoadRoom("Semi", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
+            }
+            if (GameController.LevelValue() == 5)
+            {
+                Debug.Log("already lvl 5");
+                Room bossRoom = loadedRooms[loadedRooms.Count - 1]; // Get the last loaded room
+                Room tempRoom = new Room(bossRoom.X, bossRoom.Y); // Create a temporary room with the same coordinates
+                Destroy(bossRoom.gameObject); // Destroy the original boss room
+                var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y); // Find and remove the room from the list of loaded rooms
+                loadedRooms.Remove(roomToRemove);
+                LoadRoom("End", tempRoom.X, tempRoom.Y); // Load the boss room at the same coordinates
+            }
+
         }
     }
 
@@ -253,6 +270,17 @@ public class RoomController : MonoBehaviour
 
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
+                        if (currRoom.name.Contains("Semi"))
+                        {
+                            Debug.LogError("WORKS");
+                            var spriteHandler = door.GetComponentInChildren<Animator>();
+                            if (spriteHandler != null)
+                            {
+                                spriteHandler.SetBool("isOpen", true);
+                            }
+                            door.doorCollider.SetActive(true); // Activate door colliders in the current room
+                            levelHandler.ActivateMoveLevel();
+                        }
                         if (door.tag != "bossDoor" && door.tag != "Chest")
                         {
                             var spriteHandler = door.GetComponentInChildren<Animator>();
@@ -262,6 +290,7 @@ public class RoomController : MonoBehaviour
                             }
                             door.doorCollider.SetActive(true); // Activate door colliders in the current room
                         }
+
                         else if (door.tag == "bossDoor")
                         {
                             door.spriteHandler.SetActive(false);
@@ -275,29 +304,20 @@ public class RoomController : MonoBehaviour
                         }
                     }
                 }
-                else if (currRoom.name.Contains("End"))
-                {
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.spriteHandler.SetActive(false);
-                        door.bossDoor.SetActive(true);
-                        var spriteHandler = door.GetComponentInChildren<Animator>();
-                        if (spriteHandler != null)
-                        {
-                            spriteHandler.SetBool("isOpen", true);
-                        }
-                        door.doorCollider.SetActive(true); // Activate door colliders in the current room
-                    }
-                }
                 else
                 {
                     roomCleared++;
+                    Debug.LogError("Cleared: " + roomCleared);
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
                         if (door.tag == "Chest")
                         {
                             door.doorCollider.SetActive(true);
                             door.keyArea.SetActive(true);
+                        }
+                        if (levelHandler.toggle != null)
+                        {
+                            levelHandler.toggle.SetActive(true);
                         }
                         else if (door.tag != "bossDoor")
                         {
@@ -319,7 +339,7 @@ public class RoomController : MonoBehaviour
     {
         foreach (Room room in loadedRooms)
         {
-            if (room.name.Contains("End"))
+            if (room.name.Contains("End") || room.name.Contains("Semi"))
             {
                 room.bossDoors(); // Call bossDoors function for the end room
             }
