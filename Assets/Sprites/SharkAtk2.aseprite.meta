@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d51c7ad062df2c34bbdeffe354f986ea
+guid: 33acba5b1bd080048bb732afa6aa8324
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638543540519358775
+  platformSettingsDirtyTick: 638543540086261846
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,118 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: SharkIdle2_Frame_0
+  - name: SharkAtk2_Frame_0
     originalName: 
-    pivot: {x: 0.8294118, y: 3.707317}
+    pivot: {x: 0.60273975, y: 1.2951808}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 796
+      width: 219
+      height: 83
+    spriteID: cbb2d83236f826d4094af97a3c3b437b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 796}
+  - name: SharkAtk2_Frame_1
+    originalName: 
+    pivot: {x: 0.60273975, y: 1.2951808}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 887
+      width: 219
+      height: 83
+    spriteID: 900b64ddc26d1424abf8ad3dc06cd1f6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 887}
+  - name: SharkAtk2_Frame_2
+    originalName: 
+    pivot: {x: 0.57894737, y: 0.73630136}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 642
+      width: 228
+      height: 146
+    spriteID: e7895f18a3a12584db1bf1c314c126ca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 642}
+  - name: SharkAtk2_Frame_3
+    originalName: 
+    pivot: {x: 0.59192824, y: 0.58870965}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 270
+      y: 4
+      width: 223
+      height: 186
+    spriteID: 2a78c582546208849a6bcfd940f0f7f3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 270, y: 4}
+  - name: SharkAtk2_Frame_4
+    originalName: 
+    pivot: {x: 0.59192824, y: 0.58870965}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 448
+      width: 223
+      height: 186
+    spriteID: 7e2816163dbad7a42a45a35a4439cd0e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 448}
+  - name: SharkAtk2_Frame_5
+    originalName: 
+    pivot: {x: 0.4883721, y: 0.4883178}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 170
-      height: 41
-    spriteID: 175fe58c34746b54f866c3861da4ab04
+      width: 258
+      height: 214
+    spriteID: 4d637a1e9f44f69458298bb2b8626645
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,18 +241,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: SharkIdle2_Frame_1
+  - name: SharkAtk2_Frame_6
     originalName: 
-    pivot: {x: 0.8294118, y: 3.8}
+    pivot: {x: 0.4883721, y: 0.4883178}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 53
-      width: 170
-      height: 40
-    spriteID: 699e6b5ed2f44fd4f8aa1510bdd9c53f
+      y: 226
+      width: 258
+      height: 214
+    spriteID: 43d00d818da1f5e40b6c2fe26df0cc46
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,88 +260,72 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 53}
-  - name: SharkIdle2_Frame_2
-    originalName: 
-    pivot: {x: 0.8294118, y: 4}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 149
-      width: 170
-      height: 38
-    spriteID: 21ac0259d99553c4d82a43f34cd90a41
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 149}
-  - name: SharkIdle2_Frame_3
-    originalName: 
-    pivot: {x: 0.8294118, y: 3.8}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 101
-      width: 170
-      height: 40
-    spriteID: 1707582fbe158bc43af21b90396bfef0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 101}
+    uvTransform: {x: 4, y: 226}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -868458591
-    name: SharkIdle2
+    guid: -803580281
+    name: SharkAtk2
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: SharkIdle2_Frame_0
+    - name: SharkAtk2_Frame_0
       frameIndex: 0
       cellRect:
-        x: 159
-        y: 148
-        width: 170
-        height: 41
-      spriteId: 175fe58c34746b54f866c3861da4ab04
-    - name: SharkIdle2_Frame_1
+        x: 0
+        y: 2
+        width: 219
+        height: 83
+      spriteId: cbb2d83236f826d4094af97a3c3b437b
+    - name: SharkAtk2_Frame_1
       frameIndex: 1
       cellRect:
-        x: 159
-        y: 148
-        width: 170
-        height: 40
-      spriteId: 699e6b5ed2f44fd4f8aa1510bdd9c53f
-    - name: SharkIdle2_Frame_2
+        x: 0
+        y: 2
+        width: 219
+        height: 83
+      spriteId: 900b64ddc26d1424abf8ad3dc06cd1f6
+    - name: SharkAtk2_Frame_2
       frameIndex: 2
       cellRect:
-        x: 159
-        y: 148
-        width: 170
-        height: 38
-      spriteId: 21ac0259d99553c4d82a43f34cd90a41
-    - name: SharkIdle2_Frame_3
+        x: 0
+        y: 2
+        width: 228
+        height: 146
+      spriteId: e7895f18a3a12584db1bf1c314c126ca
+    - name: SharkAtk2_Frame_3
       frameIndex: 3
       cellRect:
-        x: 159
-        y: 148
-        width: 170
-        height: 40
-      spriteId: 1707582fbe158bc43af21b90396bfef0
+        x: 0
+        y: 0
+        width: 223
+        height: 186
+      spriteId: 2a78c582546208849a6bcfd940f0f7f3
+    - name: SharkAtk2_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 0
+        y: 0
+        width: 223
+        height: 186
+      spriteId: 7e2816163dbad7a42a45a35a4439cd0e
+    - name: SharkAtk2_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 6
+        y: 5
+        width: 258
+        height: 214
+      spriteId: 4d637a1e9f44f69458298bb2b8626645
+    - name: SharkAtk2_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 6
+        y: 5
+        width: 258
+        height: 214
+      spriteId: 43d00d818da1f5e40b6c2fe26df0cc46
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -284,4 +368,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 600, y: 600}
+  canvasSize: {x: 264, y: 219}

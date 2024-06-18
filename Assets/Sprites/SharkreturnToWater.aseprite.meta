@@ -1,0 +1,903 @@
+fileFormatVersion: 2
+guid: 6f96b0f9611dc504e9f0b3911df4d426
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 50
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 0
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 0
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 638543540447282908
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: SharkreturnToWater_Frame_0
+    originalName: 
+    pivot: {x: 0.53100777, y: 0.5443925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 940
+      width: 258
+      height: 214
+    spriteID: 2ac115d231cbda848907c1e48f88852c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 940}
+  - name: SharkreturnToWater_Frame_1
+    originalName: 
+    pivot: {x: 0.53100777, y: 0.5443925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 1162
+      width: 258
+      height: 214
+    spriteID: 9413760d2aad20047972caaa9c3d4701
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 1162}
+  - name: SharkreturnToWater_Frame_2
+    originalName: 
+    pivot: {x: 0.53100777, y: 0.5443925}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 1384
+      width: 258
+      height: 214
+    spriteID: 4bd10bd5f710f844cb5fae426115e4ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 1384}
+  - name: SharkreturnToWater_Frame_3
+    originalName: 
+    pivot: {x: 0.5032258, y: 0.56392694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1490
+      width: 310
+      height: 219
+    spriteID: 3af337a5bd2a31c40957599395d367cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1490}
+  - name: SharkreturnToWater_Frame_4
+    originalName: 
+    pivot: {x: 0.5032258, y: 0.56392694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1717
+      width: 310
+      height: 219
+    spriteID: bfa2f36018359a9438dba677347b4ecd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1717}
+  - name: SharkreturnToWater_Frame_5
+    originalName: 
+    pivot: {x: 0.5032258, y: 0.56392694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 486
+      width: 310
+      height: 219
+    spriteID: 1f45634a04ff140448c19364d198455f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 486}
+  - name: SharkreturnToWater_Frame_6
+    originalName: 
+    pivot: {x: 0.5032258, y: 0.56392694}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 713
+      width: 310
+      height: 219
+    spriteID: 68e40c8efcf8e654aa7873382aeb72ea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 713}
+  - name: SharkreturnToWater_Frame_7
+    originalName: 
+    pivot: {x: 0.50755286, y: 0.5472103}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 4
+      width: 331
+      height: 233
+    spriteID: df5637dd2c5dba448b0cff190377ae8c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 4}
+  - name: SharkreturnToWater_Frame_8
+    originalName: 
+    pivot: {x: 0.50755286, y: 0.5472103}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 245
+      width: 331
+      height: 233
+    spriteID: ee9f334e1de7a194ca447882f79efd2b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 245}
+  - name: SharkreturnToWater_Frame_9
+    originalName: 
+    pivot: {x: 0.4893617, y: 0.4796296}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 329
+      height: 270
+    spriteID: 174166ffad114704daee46e4a030f0b0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: SharkreturnToWater_Frame_10
+    originalName: 
+    pivot: {x: 0.4893617, y: 0.4796296}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 282
+      width: 329
+      height: 270
+    spriteID: 92f28213f50a1d14990fdea76f1bc7c0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 282}
+  - name: SharkreturnToWater_Frame_11
+    originalName: 
+    pivot: {x: 0.5045872, y: 0.5748899}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 560
+      width: 327
+      height: 227
+    spriteID: 184639ee219a5a04a95427cd26b2dcb9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 560}
+  - name: SharkreturnToWater_Frame_12
+    originalName: 
+    pivot: {x: 0.5045872, y: 0.5748899}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 795
+      width: 327
+      height: 227
+    spriteID: fecada1573140de469d0d7a53741b8b8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 795}
+  - name: SharkreturnToWater_Frame_13
+    originalName: 
+    pivot: {x: 0.4924012, y: 0.5968469}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1030
+      width: 329
+      height: 222
+    spriteID: eae4c14e66edf7c4cb5d24a8e1298e0a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1030}
+  - name: SharkreturnToWater_Frame_14
+    originalName: 
+    pivot: {x: 0.4924012, y: 0.5968469}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1260
+      width: 329
+      height: 222
+    spriteID: ac1aae0547b22504abbab1fc900b7b40
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1260}
+  - name: SharkreturnToWater_Frame_15
+    originalName: 
+    pivot: {x: 0.5075188, y: 0.81686044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 1606
+      width: 266
+      height: 172
+    spriteID: b84e961aa53e5d44e9d430ce26cd0b4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 1606}
+  - name: SharkreturnToWater_Frame_16
+    originalName: 
+    pivot: {x: 0.5075188, y: 0.81686044}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 1786
+      width: 266
+      height: 172
+    spriteID: a641525e2c2f6ea4da5692f947909fda
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 1786}
+  - name: SharkreturnToWater_Frame_17
+    originalName: 
+    pivot: {x: 0.506383, y: 1.0391306}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 4
+      width: 235
+      height: 115
+    spriteID: 14b63de37e37dc646ad942600d5a1889
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 4}
+  - name: SharkreturnToWater_Frame_18
+    originalName: 
+    pivot: {x: 0.506383, y: 1.0391306}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 127
+      width: 235
+      height: 115
+    spriteID: 1f8cf7462f5694c4f941498b2e4d069f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 127}
+  - name: SharkreturnToWater_Frame_19
+    originalName: 
+    pivot: {x: 0.506383, y: 1.5320513}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 1966
+      width: 235
+      height: 78
+    spriteID: d7cdaebd45e28c540ad92644f30563a1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 341, y: 1966}
+  - name: SharkreturnToWater_Frame_20
+    originalName: 
+    pivot: {x: 0.506383, y: 1.5320513}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 343
+      width: 235
+      height: 78
+    spriteID: b21a5a3a57e79754aa926864df8ba323
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 343}
+  - name: SharkreturnToWater_Frame_21
+    originalName: 
+    pivot: {x: 0.506383, y: 1.5320513}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 429
+      width: 235
+      height: 78
+    spriteID: f6843085bb06828428d7c10a2f90430c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 429}
+  - name: SharkreturnToWater_Frame_22
+    originalName: 
+    pivot: {x: 0.506383, y: 1.5320513}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 515
+      width: 235
+      height: 78
+    spriteID: 9c35abbfd97f5fb47990046d0dcb9c6c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 515}
+  - name: SharkreturnToWater_Frame_23
+    originalName: 
+    pivot: {x: 0.6470588, y: 1.4294118}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1944
+      width: 221
+      height: 85
+    spriteID: 782e748c9514e7c4da5e45b74879b7bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1944}
+  - name: SharkreturnToWater_Frame_24
+    originalName: 
+    pivot: {x: 0.6470588, y: 1.4294118}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 250
+      width: 221
+      height: 85
+    spriteID: 0f4537c31aec29341aa238930d8cd804
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 250}
+  - name: SharkreturnToWater_Frame_25
+    originalName: 
+    pivot: {x: 0.652968, y: 1.4397591}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 680
+      y: 601
+      width: 219
+      height: 83
+    spriteID: 921ae8ad190386f4a8725ec397389577
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 680, y: 601}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 828098307
+    name: SharkreturnToWater
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: SharkreturnToWater_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 31
+        y: 24
+        width: 258
+        height: 214
+      spriteId: 2ac115d231cbda848907c1e48f88852c
+    - name: SharkreturnToWater_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 31
+        y: 24
+        width: 258
+        height: 214
+      spriteId: 9413760d2aad20047972caaa9c3d4701
+    - name: SharkreturnToWater_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 31
+        y: 24
+        width: 258
+        height: 214
+      spriteId: 4bd10bd5f710f844cb5fae426115e4ec
+    - name: SharkreturnToWater_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 12
+        y: 17
+        width: 310
+        height: 219
+      spriteId: 3af337a5bd2a31c40957599395d367cb
+    - name: SharkreturnToWater_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 12
+        y: 17
+        width: 310
+        height: 219
+      spriteId: bfa2f36018359a9438dba677347b4ecd
+    - name: SharkreturnToWater_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 12
+        y: 17
+        width: 310
+        height: 219
+      spriteId: 1f45634a04ff140448c19364d198455f
+    - name: SharkreturnToWater_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 12
+        y: 17
+        width: 310
+        height: 219
+      spriteId: 68e40c8efcf8e654aa7873382aeb72ea
+    - name: SharkreturnToWater_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 0
+        y: 13
+        width: 331
+        height: 233
+      spriteId: df5637dd2c5dba448b0cff190377ae8c
+    - name: SharkreturnToWater_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 0
+        y: 13
+        width: 331
+        height: 233
+      spriteId: ee9f334e1de7a194ca447882f79efd2b
+    - name: SharkreturnToWater_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 7
+        y: 11
+        width: 329
+        height: 270
+      spriteId: 174166ffad114704daee46e4a030f0b0
+    - name: SharkreturnToWater_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 7
+        y: 11
+        width: 329
+        height: 270
+      spriteId: 92f28213f50a1d14990fdea76f1bc7c0
+    - name: SharkreturnToWater_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 3
+        y: 10
+        width: 327
+        height: 227
+      spriteId: 184639ee219a5a04a95427cd26b2dcb9
+    - name: SharkreturnToWater_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 3
+        y: 10
+        width: 327
+        height: 227
+      spriteId: fecada1573140de469d0d7a53741b8b8
+    - name: SharkreturnToWater_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 6
+        y: 8
+        width: 329
+        height: 222
+      spriteId: eae4c14e66edf7c4cb5d24a8e1298e0a
+    - name: SharkreturnToWater_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 6
+        y: 8
+        width: 329
+        height: 222
+      spriteId: ac1aae0547b22504abbab1fc900b7b40
+    - name: SharkreturnToWater_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 33
+        y: 0
+        width: 266
+        height: 172
+      spriteId: b84e961aa53e5d44e9d430ce26cd0b4c
+    - name: SharkreturnToWater_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 33
+        y: 0
+        width: 266
+        height: 172
+      spriteId: a641525e2c2f6ea4da5692f947909fda
+    - name: SharkreturnToWater_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 115
+      spriteId: 14b63de37e37dc646ad942600d5a1889
+    - name: SharkreturnToWater_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 115
+      spriteId: 1f8cf7462f5694c4f941498b2e4d069f
+    - name: SharkreturnToWater_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 78
+      spriteId: d7cdaebd45e28c540ad92644f30563a1
+    - name: SharkreturnToWater_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 78
+      spriteId: b21a5a3a57e79754aa926864df8ba323
+    - name: SharkreturnToWater_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 78
+      spriteId: f6843085bb06828428d7c10a2f90430c
+    - name: SharkreturnToWater_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 49
+        y: 21
+        width: 235
+        height: 78
+      spriteId: 9c35abbfd97f5fb47990046d0dcb9c6c
+    - name: SharkreturnToWater_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 25
+        y: 19
+        width: 221
+        height: 85
+      spriteId: 782e748c9514e7c4da5e45b74879b7bd
+    - name: SharkreturnToWater_Frame_24
+      frameIndex: 24
+      cellRect:
+        x: 25
+        y: 19
+        width: 221
+        height: 85
+      spriteId: 0f4537c31aec29341aa238930d8cd804
+    - name: SharkreturnToWater_Frame_25
+      frameIndex: 25
+      cellRect:
+        x: 25
+        y: 21
+        width: 219
+        height: 83
+      spriteId: 921ae8ad190386f4a8725ec397389577
+    linkedCells: []
+    parentIndex: -1
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 336, y: 281}
