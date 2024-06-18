@@ -37,7 +37,6 @@ public class RoomController : MonoBehaviour
     private bool itemSpawned;
     private Chest chest;
     public bool isKeySpawned = false;
-    public LevelHandler levelHandler;
     void Awake()
     {
         instance = this; // Set the singleton instance
@@ -270,17 +269,6 @@ public class RoomController : MonoBehaviour
 
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
-                        if (currRoom.name.Contains("Semi"))
-                        {
-                            Debug.LogError("WORKS");
-                            var spriteHandler = door.GetComponentInChildren<Animator>();
-                            if (spriteHandler != null)
-                            {
-                                spriteHandler.SetBool("isOpen", true);
-                            }
-                            door.doorCollider.SetActive(true); // Activate door colliders in the current room
-                            levelHandler.ActivateMoveLevel();
-                        }
                         if (door.tag != "bossDoor" && door.tag != "Chest")
                         {
                             var spriteHandler = door.GetComponentInChildren<Animator>();
@@ -290,7 +278,6 @@ public class RoomController : MonoBehaviour
                             }
                             door.doorCollider.SetActive(true); // Activate door colliders in the current room
                         }
-
                         else if (door.tag == "bossDoor")
                         {
                             door.spriteHandler.SetActive(false);
@@ -314,10 +301,6 @@ public class RoomController : MonoBehaviour
                         {
                             door.doorCollider.SetActive(true);
                             door.keyArea.SetActive(true);
-                        }
-                        if (levelHandler.toggle != null)
-                        {
-                            levelHandler.toggle.SetActive(true);
                         }
                         else if (door.tag != "bossDoor")
                         {
